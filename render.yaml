@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: axionik-api
+    runtime: node
+    rootDir: .
+    buildCommand: npm install && npm run build:dashboard
+    startCommand: npm run start --workspace=server
+    healthCheckPath: /health
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false

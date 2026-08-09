@@ -1,0 +1,19 @@
+{
+  "name": "axionik-raymonds",
+  "private": true,
+  "version": "1.0.0",
+  "description": "AXIONIK Raymonds WiFi retail platform — Express/Supabase API + captive portal + dashboard, all plain JS",
+  "workspaces": [
+    "server",
+    "captive-portal-app",
+    "dashboard-app"
+  ],
+  "scripts": {
+    "dev:server": "npm run dev --workspace=server",
+    "dev:portal": "npm run dev --workspace=captive-portal-app",
+    "dev:dashboard": "npm run dev --workspace=dashboard-app",
+    "build:portal": "npm run build --workspace=captive-portal-app",
+    "build:dashboard": "npm run build --workspace=dashboard-app",
+    "build": "npm run build:portal && npm run build:dashboard"
+  }
+}
