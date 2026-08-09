@@ -1,0 +1,38 @@
+Marketplace Supabase project — public schema (from information_schema.columns)
+Confirmed via SQL query in Supabase SQL Editor.
+
+Relevant tables for the Raymonds dashboard's Marketplace Activity panel:
+
+app_users:         id, full_name, phone, email, created_at
+bookings:          id, user_id, show_id, seat_ids[], num_seats, base_amount,
+                    discount_id, discount_amount, final_amount, status, source,
+                    source_client, payment_ref, created_at, confirmed_at
+shows:             id, movie_id, screen_id, theatre_id, show_date, show_time,
+                    base_price, total_seats, available_seats, status, created_at
+movies:            id, title, language, genre[], duration_minutes, certificate,
+                    release_date, poster_url, is_active, created_at
+theatres:          id, name, city_id, address, total_screens, is_active,
+                    created_at, photo_url
+
+retail_orders:     id, user_id, store_id, line_items (jsonb), base_amount,
+                    discount_id, discount_amount, final_amount, status, source,
+                    source_client, payment_ref, created_at, confirmed_at
+stores:            id, brand_name, city_id, address, category, is_active,
+                    created_at, logo_url
+products:          id, store_id, name, description, category, brand,
+                    base_price, image_url, is_active, created_at
+product_variants:  id, product_id, size, color, sku, price, stock_qty, created_at
+
+reservations:      id, user_id, restaurant_id, table_slot_id, party_size,
+                    pre_ordered_items (jsonb), base_amount, discount_id,
+                    discount_amount, final_amount, status, source,
+                    source_client, payment_ref, created_at, confirmed_at
+restaurants:       id, name, city_id, address, cuisine[], price_range,
+                    is_active, created_at, photo_url
+restaurant_tables:  id, restaurant_id, table_label, capacity, created_at
+table_slots:       id, table_id, restaurant_id, slot_date, slot_time, status,
+                    held_until
+
+None of the transactional tables (bookings / retail_orders / reservations)
+have a direct email column — all link to app_users via user_id. The dashboard
+looks up app_users.id by email first, then queries each table by user_id.
