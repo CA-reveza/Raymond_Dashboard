@@ -1,8 +1,8 @@
 {
-  "name": "axionik-raymonds",
+  "name": "axionik-shoppers-stop",
   "private": true,
   "version": "1.0.0",
-  "description": "AXIONIK Raymonds WiFi retail platform — Express/Supabase API + captive portal + dashboard, all plain JS",
+  "description": "AXIONIK Shoppers Stop WiFi retail platform — Express/Supabase API + captive portal + dashboard, all plain JS",
   "workspaces": [
     "server",
     "captive-portal-app",

@@ -1,4 +1,4 @@
-# AXIONIK — Raymonds WiFi Retail Platform
+# AXIONIK — Shoppers Stop WiFi Retail Platform
 
 A simple, all-JavaScript rewrite of the AXIONIK captive-portal + retail dashboard system.
 Backend is Node.js/Express + Supabase (no Firebase, no Python). Both frontends are the
@@ -13,7 +13,7 @@ axionik/
 ├── dashboard-app/       ← Store manager dashboard (React/Vite, deploy to Vercel — or served by the API)
 ├── mobile-app/           ← Flutter mobile app (unrelated to the JS rewrite — build/run separately)
 ├── firmware/             ← ESP32 captive-portal firmware (Arduino/C++ — flash separately)
-├── docs/                 ← Supabase schema references (Raymonds + Marketplace)
+├── docs/                 ← Supabase schema references (Shoppers Stop + Marketplace)
 ├── render.yaml           ← Render blueprint for the backend
 └── package.json           ← npm workspaces root (server + captive-portal-app + dashboard-app only)
 ```

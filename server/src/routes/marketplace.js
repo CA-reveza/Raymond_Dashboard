@@ -161,6 +161,77 @@ async function fetchRestaurantReservations(userId) {
   });
 }
 
+// ---------------------------------------------------------------------------
+// All retail orders, across every customer — for the dashboard's Orders tab.
+// Deliberately retail-only (no movie bookings, no restaurant reservations):
+// this powers a single merged Orders view, not a separate per-vertical tab.
+// Tags each row with which channel placed it (e.g. Claude's MCP connector)
+// so the dashboard can badge it accordingly.
+// ---------------------------------------------------------------------------
+function connectorLabel(source, sourceClient) {
+  if (sourceClient) {
+    const name = sourceClient.charAt(0).toUpperCase() + sourceClient.slice(1);
+    return `Ordered through ${name} Connector`;
+  }
+  if (source === "mcp") return "Ordered through Connector";
+  return null;
+}
+
+router.get("/api/marketplace/orders", async (req, res) => {
+  if (!marketplaceReady) {
+    return res.json({ success: true, marketplace_ready: false, orders: [] });
+  }
+
+  try {
+    const { data: orders, error } = await marketplaceDb
+      .from("retail_orders")
+      .select(
+        "id, user_id, store_id, line_items, base_amount, discount_amount, final_amount, status, source, source_client, payment_ref, created_at, confirmed_at"
+      )
+      .order("created_at", { ascending: false })
+      .limit(200);
+    if (error) throw error;
+    if (!orders?.length) return res.json({ success: true, marketplace_ready: true, orders: [] });
+
+    const users = await lookupById(
+      "app_users",
+      orders.map((o) => o.user_id),
+      "id, full_name, email, phone"
+    );
+    const stores = await lookupById(
+      "stores",
+      orders.map((o) => o.store_id),
+      "id, brand_name"
+    );
+
+    const mapped = orders.map((o) => {
+      const user = users.get(o.user_id);
+      const store = stores.get(o.store_id);
+      return {
+        id: o.id,
+        customer_name: user?.full_name || "-",
+        customer_email: user?.email || "-",
+        customer_phone: user?.phone || "-",
+        store: store?.brand_name || "-",
+        items: (o.line_items || []).map((li) => `${li.qty}x @Rs${li.unit_price}`).join(", "),
+        amount: o.final_amount,
+        discount: o.discount_amount,
+        status: o.status,
+        source: o.source,
+        source_client: o.source_client || null,
+        channel_label: connectorLabel(o.source, o.source_client),
+        payment_ref: o.payment_ref || "-",
+        created_at: o.created_at,
+        confirmed_at: o.confirmed_at,
+      };
+    });
+
+    res.json({ success: true, marketplace_ready: true, orders: mapped });
+  } catch (err) {
+    res.json({ success: false, marketplace_ready: true, error: err.message, orders: [] });
+  }
+});
+
 router.get("/api/marketplace/:email", async (req, res) => {
   const email = decodeURIComponent(req.params.email || "").trim().toLowerCase();
   if (!email) return res.status(400).json({ success: false, error: "email is required" });
