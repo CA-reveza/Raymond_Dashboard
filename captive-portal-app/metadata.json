@@ -1,6 +1,6 @@
 {
   "name": "Shoppers Stop Wi-Fi Portal",
-  "description": "In-store Wi-Fi captive portal experience with surprise welcome reward and in-store discovery for Shoppers Stop.",
+  "description": "In-store Wi-Fi captive portal experience with surprise welcome reward and in-store discovery for Raymonds.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
