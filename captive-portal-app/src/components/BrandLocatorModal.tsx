@@ -49,7 +49,7 @@ export const BrandLocatorModal: React.FC<BrandLocatorModalProps> = ({ brand, onC
               <div className="absolute -right-8 -top-8 w-28 h-28 rounded-full bg-[#122B52]/30 pointer-events-none" />
               
               <div className="text-[10px] uppercase font-semibold tracking-[0.25em] text-[#d4af37] mb-1">
-                RAYMONDS PARTNER BRAND
+                SHOPPERS STOP PARTNER BRAND
               </div>
 
               <h3 className="text-3xl font-serif font-black tracking-wider uppercase mb-1">

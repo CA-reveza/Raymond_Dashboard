@@ -1,5 +1,5 @@
 -- ===========================================================================
--- Supabase PostgreSQL Database Schema for Raymonds Retail System
+-- Supabase PostgreSQL Database Schema for Shoppers Stop Retail System
 -- Run this script in your Supabase Dashboard SQL Editor (https://supabase.com)
 -- ===========================================================================
 

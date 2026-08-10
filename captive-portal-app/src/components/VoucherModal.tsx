@@ -50,7 +50,7 @@ export const VoucherModal: React.FC<VoucherModalProps> = ({ customer, onClose })
             <div className="absolute -right-3.5 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-black/60 border-l border-[#c5a059]" />
 
             <div className="text-[10px] uppercase font-bold tracking-[0.2em] text-[#122B52] mb-1">
-              EXCLUSIVE RAYMONDS REWARD
+              EXCLUSIVE SHOPPERS STOP REWARD
             </div>
 
             <h3 className="text-4xl font-serif font-black text-[#1a1a1a]">
@@ -93,7 +93,7 @@ export const VoucherModal: React.FC<VoucherModalProps> = ({ customer, onClose })
             <ul className="space-y-1 text-[11px] list-disc list-inside text-[#666052]">
               <li>{voucherDesc}</li>
               <li>Minimum purchase requirement: <strong>{minOrder}</strong>.</li>
-              <li>Valid for in-store purchases at Raymonds flagship stores.</li>
+              <li>Valid for in-store purchases at Shoppers Stop flagship stores.</li>
               <li>Assigned to Wi-Fi guest: <strong>{customer.fullName}</strong>.</li>
             </ul>
           </div>

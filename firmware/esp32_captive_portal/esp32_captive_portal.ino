@@ -240,7 +240,7 @@ void setup() {
   digitalWrite(LED_BUILTIN, HIGH);
 
   Serial.println("\n\n=============================================");
-  Serial.println("  RAYMONDS Captive Portal — AXIONIK");
+  Serial.println("  SHOPPERS STOP Captive Portal — AXIONIK");
   Serial.println("=============================================");
 
   WiFi.persistent(false);
@@ -256,10 +256,10 @@ void setup() {
   IPAddress subnet(255, 255, 255, 0);
 
   WiFi.softAPConfig(apIP, gateway, subnet);
-  bool apOk = WiFi.softAP("RAYMONDS_WiFi", NULL, 1, 0, 4);
+  bool apOk = WiFi.softAP("SHOPPERS_STOP_WiFi", NULL, 1, 0, 4);
   
   if (apOk) {
-    Serial.println(">>> SUCCESS: RAYMONDS_WiFi IS BROADCASTING! <<<");
+    Serial.println(">>> SUCCESS: SHOPPERS_STOP_WiFi IS BROADCASTING! <<<");
     Serial.print("Access Point IP: ");
     Serial.println(WiFi.softAPIP().toString());
   } else {
@@ -267,8 +267,8 @@ void setup() {
   }
 
 #if defined(ESP32) || defined(ESP8266)
-  if (MDNS.begin("raymonds")) {
-    Serial.println("mDNS Service: Started (http://raymonds.local)");
+  if (MDNS.begin("shoppersstop")) {
+    Serial.println("mDNS Service: Started (http://shoppersstop.local)");
     MDNS.addService("http", "tcp", 80);
   }
 #endif
@@ -323,6 +323,6 @@ void loop() {
   if (millis() - lastHeartbeat > 2000) {
     lastHeartbeat = millis();
     digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
-    Serial.println("[ESP32 HEARTBEAT] RAYMONDS_WiFi is broadcasting...");
+    Serial.println("[ESP32 HEARTBEAT] SHOPPERS_STOP_WiFi is broadcasting...");
   }
 }

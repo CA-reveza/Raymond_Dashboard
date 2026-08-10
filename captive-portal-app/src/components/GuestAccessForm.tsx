@@ -38,7 +38,7 @@ export const GuestAccessForm: React.FC<GuestAccessFormProps> = ({ onSuccessNewUs
     const loadStored = async () => {
       let customersArr: any[] = [];
       try {
-        const local = localStorage.getItem('RAYMONDS_STORED_CUSTOMERS');
+        const local = localStorage.getItem('SS_STORED_CUSTOMERS');
         if (local) customersArr = JSON.parse(local);
       } catch (e) {}
 
@@ -295,12 +295,12 @@ export const GuestAccessForm: React.FC<GuestAccessFormProps> = ({ onSuccessNewUs
         }).catch(() => {});
 
         try {
-          const existingStr = localStorage.getItem('RAYMONDS_STORED_CUSTOMERS');
+          const existingStr = localStorage.getItem('SS_STORED_CUSTOMERS');
           let existingArr = existingStr ? JSON.parse(existingStr) : [];
           if (!Array.isArray(existingArr)) existingArr = [];
           existingArr = existingArr.filter((c: any) => c.name.toLowerCase() !== cleanName.toLowerCase());
           existingArr = [newCustObj, ...existingArr];
-          localStorage.setItem('RAYMONDS_STORED_CUSTOMERS', JSON.stringify(existingArr));
+          localStorage.setItem('SS_STORED_CUSTOMERS', JSON.stringify(existingArr));
         } catch (e) {}
 
         try {
@@ -381,10 +381,10 @@ export const GuestAccessForm: React.FC<GuestAccessFormProps> = ({ onSuccessNewUs
             <div className="text-center mb-6">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#122B52]/10 text-[#122B52] text-xs font-bold uppercase tracking-wider mb-2">
                 <Wifi className="w-3.5 h-3.5" />
-                <span>{activeTab === 'new' ? 'Raymonds Guest Wi-Fi' : 'First Citizen Member Login'}</span>
+                <span>{activeTab === 'new' ? 'Shoppers Stop Guest Wi-Fi' : 'First Citizen Member Login'}</span>
               </div>
               <h1 className="text-2xl sm:text-3xl font-serif font-black text-[#1a1a1a] tracking-tight">
-                RAYMONDS
+                SHOPPERS STOP
               </h1>
               <p className="text-xs text-[#777063] uppercase tracking-widest font-semibold mt-0.5">
                 {activeTab === 'new' ? 'NEW GUEST REGISTRATION & REWARD' : 'RESUME MEMBER WI-FI SESSION'}
@@ -408,7 +408,7 @@ export const GuestAccessForm: React.FC<GuestAccessFormProps> = ({ onSuccessNewUs
                     {connectingStep === 3 && (activeTab === 'returning' ? 'Session Resumed! Loading Companion...' : 'Connection Established! Unlocking Voucher...')}
                   </h3>
                   <p className="text-xs text-[#777063] mt-1">
-                    Welcome to Raymonds • {fullName || 'Valued Guest'}
+                    Welcome to Shoppers Stop • {fullName || 'Valued Guest'}
                   </p>
                 </div>
               </div>
@@ -577,7 +577,7 @@ export const GuestAccessForm: React.FC<GuestAccessFormProps> = ({ onSuccessNewUs
                         className="mt-0.5 rounded border-[#c5beaf] text-[#122B52] focus:ring-[#122B52]"
                       />
                       <span className="text-xs text-[#555045] leading-snug">
-                        I want to receive exclusive offers, fashion updates & VIP privileges from Raymonds.
+                        I want to receive exclusive offers, fashion updates & VIP privileges from Shoppers Stop.
                       </span>
                     </label>
                   )}

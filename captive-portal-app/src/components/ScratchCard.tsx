@@ -286,7 +286,7 @@ export const ScratchCard: React.FC<ScratchCardProps> = ({ customer, onExplore, o
               <div className="absolute -left-6 -top-6 w-20 h-20 rounded-full bg-[#122B52]/5 pointer-events-none" />
 
               <span className="text-[10px] font-bold uppercase tracking-widest text-[#122B52] mb-1">
-                RAYMONDS DASHBOARD COUPON
+                SHOPPERS STOP DASHBOARD COUPON
               </span>
 
               <div className="text-3xl sm:text-4xl font-serif font-black text-[#1a1a1a] tracking-tight text-shadow-sm my-0.5">

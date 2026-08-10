@@ -446,7 +446,7 @@ app.post('/api/orders', (req, res) => {
   // Format line items with high-res images
   const formattedItems = (body.items || []).map((itm, idx) => ({
     id: `ITM-${Date.now()}-${idx}`,
-    name: itm.product ? itm.product.name : (itm.name || 'Raymonds Fashion Item'),
+    name: itm.product ? itm.product.name : (itm.name || 'Shoppers Stop Fashion Item'),
     sku: itm.product ? itm.product.id : (itm.sku || `SS-SKU-${idx}`),
     category: itm.product ? itm.product.category : (itm.category || 'In-Store Kiosk'),
     quantity: itm.quantity || 1,
@@ -496,7 +496,7 @@ app.post('/api/orders', (req, res) => {
 // POST Coupon Redemption (From Captive Portal or Checkout)
 app.post('/api/redemptions', (req, res) => {
   const { couponCode, customerName, customerEmail, customerPhone, orderId, orderTotal, discountSaved, loyaltyTier, storeLocation } = req.body;
-  const cleanCode = (couponCode || 'RAYMONDS500').trim().toUpperCase();
+  const cleanCode = (couponCode || 'SHOPPERS500').trim().toUpperCase();
 
   const redemption = {
     id: `RED-${Date.now().toString().slice(-6)}`,

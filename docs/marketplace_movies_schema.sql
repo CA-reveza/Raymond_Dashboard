@@ -113,7 +113,7 @@ create table bookings (
 );
 
 -- RLS: bookings/app_users are locked to auth.uid() = user_id, which is why
--- the Raymonds dashboard connects with the service_role key (bypasses
+-- the Shoppers Stop dashboard connects with the service_role key (bypasses
 -- RLS) rather than the anon/publishable key.
 
 -- =========================================================

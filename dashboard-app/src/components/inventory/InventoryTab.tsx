@@ -78,7 +78,7 @@ export const InventoryTab: React.FC<InventoryTabProps> = ({
       'Hyderabad - Inorbit Mall Hitec City': 'HYD',
       'Online Store (eCom Direct)': 'ECOM',
     };
-    const prefix = prefixMap[store] || 'SS';
+    const prefix = prefixMap[store] || 'RR';
     const storeShort = (store || '').split(' - ')[0] || 'Store';
 
     return items.map((item) => ({
@@ -116,10 +116,10 @@ export const InventoryTab: React.FC<InventoryTabProps> = ({
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-bold text-slate-900 tracking-tight">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
             Inventory & Warehouse Telemetry
           </h2>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             Real-time stock audit across store aisles & central fulfillment centers
           </p>
         </div>
@@ -139,7 +139,7 @@ export const InventoryTab: React.FC<InventoryTabProps> = ({
                 'Store Location': i.location,
                 'Status': i.stock === 0 ? 'Out of Stock' : i.stock <= i.lowStockThreshold ? 'Low Stock' : 'In Stock',
               }));
-              downloadReportFile('Store_Inventory_Valuation_Ledger', 'CSV', 'Raymonds Flagship', exportRows);
+              downloadReportFile('Store_Inventory_Valuation_Ledger', 'CSV', 'Raymond Flagship', exportRows);
             }}
           >
             Export Stock CSV
@@ -171,17 +171,17 @@ export const InventoryTab: React.FC<InventoryTabProps> = ({
           className={`p-4 rounded-2xl text-left border transition-all cursor-pointer ${
             statusFilter === 'All'
               ? 'bg-slate-900 text-white border-slate-900 ring-2 ring-slate-900/20 shadow-md scale-[1.01]'
-              : 'bg-white text-slate-900 border-slate-200 hover:border-slate-300 hover:shadow-2xs'
+              : 'bg-white dark:bg-[#141F38] text-slate-900 dark:text-slate-100 border-slate-200 dark:border-white/10 hover:border-slate-300 hover:shadow-2xs'
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className={`text-[10px] font-bold uppercase tracking-wider ${statusFilter === 'All' ? 'text-slate-300' : 'text-slate-400'}`}>
+            <span className={`text-[10px] font-bold uppercase tracking-wider ${statusFilter === 'All' ? 'text-slate-300' : 'text-slate-400 dark:text-slate-500'}`}>
               Total Monitored SKUs
             </span>
-            <ChevronRight className={`w-4 h-4 ${statusFilter === 'All' ? 'text-white' : 'text-slate-400'}`} />
+            <ChevronRight className={`w-4 h-4 ${statusFilter === 'All' ? 'text-white' : 'text-slate-400 dark:text-slate-500'}`} />
           </div>
           <div className="text-2xl font-bold mt-1">{inventory.length} SKUs</div>
-          <p className={`text-[10px] mt-1 ${statusFilter === 'All' ? 'text-slate-300 font-medium' : 'text-slate-400'}`}>
+          <p className={`text-[10px] mt-1 ${statusFilter === 'All' ? 'text-slate-300 font-medium' : 'text-slate-400 dark:text-slate-500'}`}>
             {statusFilter === 'All' ? '✓ Showing All Items' : 'Click to view all SKUs'}
           </p>
         </button>
@@ -196,13 +196,13 @@ export const InventoryTab: React.FC<InventoryTabProps> = ({
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className={`text-[10px] font-bold uppercase tracking-wider ${statusFilter === 'In Stock' ? 'text-emerald-100' : 'text-emerald-700'}`}>
+            <span className={`text-[10px] font-bold uppercase tracking-wider ${statusFilter === 'In Stock' ? 'text-emerald-100' : 'text-emerald-700 dark:text-emerald-400'}`}>
               In Stock & Available
             </span>
             <ChevronRight className={`w-4 h-4 ${statusFilter === 'In Stock' ? 'text-white' : 'text-emerald-500'}`} />
           </div>
           <div className="text-2xl font-bold mt-1">{inStockCount} SKUs</div>
-          <p className={`text-[10px] mt-1 ${statusFilter === 'In Stock' ? 'text-emerald-100 font-medium' : 'text-emerald-600'}`}>
+          <p className={`text-[10px] mt-1 ${statusFilter === 'In Stock' ? 'text-emerald-100 font-medium' : 'text-emerald-600 dark:text-emerald-400'}`}>
             {statusFilter === 'In Stock' ? '✓ Showing In-Stock Items' : 'Click to filter in-stock'}
           </p>
         </button>
@@ -217,13 +217,13 @@ export const InventoryTab: React.FC<InventoryTabProps> = ({
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className={`text-[10px] font-bold uppercase tracking-wider ${statusFilter === 'Low Stock' ? 'text-amber-100' : 'text-amber-700'}`}>
+            <span className={`text-[10px] font-bold uppercase tracking-wider ${statusFilter === 'Low Stock' ? 'text-amber-100' : 'text-amber-700 dark:text-amber-400'}`}>
               Low Stock Alerts
             </span>
             <ChevronRight className={`w-4 h-4 ${statusFilter === 'Low Stock' ? 'text-white' : 'text-amber-500'}`} />
           </div>
           <div className="text-2xl font-bold mt-1">{lowStockCount} Items</div>
-          <p className={`text-[10px] mt-1 ${statusFilter === 'Low Stock' ? 'text-amber-100 font-medium' : 'text-amber-600'}`}>
+          <p className={`text-[10px] mt-1 ${statusFilter === 'Low Stock' ? 'text-amber-100 font-medium' : 'text-amber-600 dark:text-amber-400'}`}>
             {statusFilter === 'Low Stock' ? '✓ Showing Low Stock Items' : 'Click to view low stock'}
           </p>
         </button>
@@ -238,13 +238,13 @@ export const InventoryTab: React.FC<InventoryTabProps> = ({
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className={`text-[10px] font-bold uppercase tracking-wider ${statusFilter === 'Out of Stock' ? 'text-rose-100' : 'text-rose-700'}`}>
+            <span className={`text-[10px] font-bold uppercase tracking-wider ${statusFilter === 'Out of Stock' ? 'text-rose-100' : 'text-rose-700 dark:text-rose-400'}`}>
               Out of Stock
             </span>
             <ChevronRight className={`w-4 h-4 ${statusFilter === 'Out of Stock' ? 'text-white' : 'text-rose-500'}`} />
           </div>
           <div className="text-2xl font-bold mt-1">{outOfStockCount} Items</div>
-          <p className={`text-[10px] mt-1 ${statusFilter === 'Out of Stock' ? 'text-rose-100 font-medium' : 'text-rose-600'}`}>
+          <p className={`text-[10px] mt-1 ${statusFilter === 'Out of Stock' ? 'text-rose-100 font-medium' : 'text-rose-600 dark:text-rose-400'}`}>
             {statusFilter === 'Out of Stock' ? '✓ Showing Out of Stock' : 'Click to view out of stock'}
           </p>
         </button>
@@ -287,7 +287,7 @@ export const InventoryTab: React.FC<InventoryTabProps> = ({
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                   departmentTab === dept
                     ? 'bg-[#122B52] text-white shadow-2xs'
-                    : 'bg-slate-100 hover:bg-slate-200 text-slate-600'
+                    : 'bg-slate-100 dark:bg-white/10 hover:bg-slate-200 text-slate-600 dark:text-slate-400'
                 }`}
               >
                 {dept}
@@ -297,13 +297,13 @@ export const InventoryTab: React.FC<InventoryTabProps> = ({
 
           {/* Search Box */}
           <div className="relative min-w-[240px]">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3 pointer-events-none" />
+            <Search className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3.5 top-3 pointer-events-none" />
             <input
               type="text"
               placeholder="Search product SKU or title..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-slate-50 hover:bg-slate-100/80 focus:bg-white text-xs text-slate-900 pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#122B52] focus:ring-2 focus:ring-[#122B52]/20 outline-none transition-all"
+              className="w-full bg-slate-50 dark:bg-white/5 hover:bg-slate-100/80 focus:bg-white dark:focus:bg-[#141F38] text-xs text-slate-900 dark:text-slate-100 pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 focus:border-[#122B52] focus:ring-2 focus:ring-[#122B52]/20 outline-none transition-all"
             />
           </div>
         </div>
@@ -314,7 +314,7 @@ export const InventoryTab: React.FC<InventoryTabProps> = ({
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50/80 text-slate-500 font-bold uppercase tracking-wider">
+              <tr className="border-b border-slate-200 dark:border-white/10 bg-slate-50/80 text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">
                 <th className="py-3.5 px-4">SKU & Item Name</th>
                 <th className="py-3.5 px-4">Department</th>
                 <th className="py-3.5 px-4">Aisle Location</th>
@@ -324,7 +324,7 @@ export const InventoryTab: React.FC<InventoryTabProps> = ({
                 <th className="py-3.5 px-4 text-right">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-white/10">
               {filteredInventory.map((item) => {
                 const stockRatio = Math.min(100, Math.max(0, (item.stock / 30) * 100));
                 return (
@@ -341,26 +341,26 @@ export const InventoryTab: React.FC<InventoryTabProps> = ({
                         <img
                           src={item.image}
                           alt={item.name}
-                          className="w-10 h-10 rounded-lg object-cover border border-slate-200 shrink-0"
+                          className="w-10 h-10 rounded-lg object-cover border border-slate-200 dark:border-white/10 shrink-0"
                         />
                         <div>
-                          <div className="font-bold text-slate-900 group-hover:text-[#122B52] transition-colors line-clamp-1">{item.name}</div>
-                          <div className="text-[10px] text-slate-400 font-mono">
+                          <div className="font-bold text-slate-900 dark:text-slate-100 group-hover:text-[#122B52] transition-colors line-clamp-1">{item.name}</div>
+                          <div className="text-[10px] text-slate-400 dark:text-slate-500 font-mono">
                             SKU: {item.sku}
                           </div>
                         </div>
                       </div>
                     </td>
-                    <td className="py-3.5 px-4 text-slate-700 font-medium">{item.department}</td>
-                    <td className="py-3.5 px-4 text-slate-600 font-mono text-[11px]">
+                    <td className="py-3.5 px-4 text-slate-700 dark:text-slate-300 font-medium">{item.department}</td>
+                    <td className="py-3.5 px-4 text-slate-600 dark:text-slate-400 font-mono text-[11px]">
                       {item.location}
                     </td>
-                    <td className="py-3.5 px-4 font-extrabold text-slate-900">
+                    <td className="py-3.5 px-4 font-extrabold text-slate-900 dark:text-slate-100">
                       {formatINR(item.price)}
                     </td>
                     <td className="py-3.5 px-4">
-                      <div className="font-bold text-slate-900 mb-1">{item.stock} Units</div>
-                      <div className="w-24 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                      <div className="font-bold text-slate-900 dark:text-slate-100 mb-1">{item.stock} Units</div>
+                      <div className="w-24 bg-slate-100 dark:bg-white/10 rounded-full h-1.5 overflow-hidden">
                         <div
                           className={`h-1.5 rounded-full ${
                             item.stock === 0
@@ -427,38 +427,38 @@ export const InventoryTab: React.FC<InventoryTabProps> = ({
           }
         >
           <div className="space-y-4 text-xs">
-            <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between">
+            <div className="p-3 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl flex items-center justify-between">
               <div>
-                <span className="text-slate-400 font-medium">Current Stock On Hand:</span>
-                <div className="text-lg font-bold text-slate-900">{selectedItem.stock} Units</div>
+                <span className="text-slate-400 dark:text-slate-500 font-medium">Current Stock On Hand:</span>
+                <div className="text-lg font-bold text-slate-900 dark:text-slate-100">{selectedItem.stock} Units</div>
               </div>
               <StatusBadge status={selectedItem.status} />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                 Stock Quantity Change (+/- Units)
               </label>
               <input
                 type="number"
                 value={adjustmentQty}
                 onChange={(e) => setAdjustmentQty(Number(e.target.value))}
-                className="w-full bg-white text-sm font-mono font-bold text-slate-900 p-2.5 rounded-xl border border-slate-300 focus:border-[#122B52] focus:ring-2 focus:ring-[#122B52]/20 outline-none"
+                className="w-full bg-white dark:bg-[#141F38] text-sm font-mono font-bold text-slate-900 dark:text-slate-100 p-2.5 rounded-xl border border-slate-300 focus:border-[#122B52] focus:ring-2 focus:ring-[#122B52]/20 outline-none"
               />
-              <p className="text-[10px] text-slate-400 mt-1">
+              <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-1">
                 New stock total will be:{' '}
-                <strong className="text-slate-900">{selectedItem.stock + adjustmentQty} Units</strong>
+                <strong className="text-slate-900 dark:text-slate-100">{selectedItem.stock + adjustmentQty} Units</strong>
               </p>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
                 Warehouse Adjustment Reason / PO Note
               </label>
               <textarea
                 rows={2}
                 placeholder="e.g. Received shipment from Tommy Hilfiger distributor PO-9812..."
-                className="w-full bg-white text-xs p-2.5 rounded-xl border border-slate-300 focus:border-[#122B52] outline-none"
+                className="w-full bg-white dark:bg-[#141F38] text-xs p-2.5 rounded-xl border border-slate-300 focus:border-[#122B52] outline-none"
               />
             </div>
           </div>

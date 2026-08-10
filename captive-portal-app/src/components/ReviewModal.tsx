@@ -78,7 +78,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
               Thank You for Your Feedback!
             </h3>
             <p className="text-xs text-[#666052] max-w-xs mx-auto">
-              Your review helps us continuously improve in-store wayfinding and shopping at Raymonds.
+              Your review helps us continuously improve in-store wayfinding and shopping at Shoppers Stop.
             </p>
           </div>
         ) : (
@@ -173,7 +173,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
 
             {/* Footer note */}
             <div className="pt-2 border-t border-[#f0ebd9] flex items-center justify-between text-[10px] text-[#888172]">
-              <span>Raymonds Customer Voice</span>
+              <span>Shoppers Stop Customer Voice</span>
               <button onClick={onClose} className="hover:underline text-[#122B52] font-semibold cursor-pointer">
                 Skip & Continue
               </button>

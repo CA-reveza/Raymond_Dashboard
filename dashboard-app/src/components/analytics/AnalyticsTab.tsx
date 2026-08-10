@@ -26,17 +26,17 @@ export const AnalyticsTab: React.FC = () => {
   const channelData = [
     { channel: 'In-Store POS Terminals', sales: 28450000, share: '58%' },
     { channel: 'Mobile App Direct', sales: 12100000, share: '25%' },
-    { channel: 'Raymonds.com Web', sales: 8372000, share: '17%' },
+    { channel: 'MyRaymond.com Web', sales: 8372000, share: '17%' },
   ];
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
       {/* Header */}
       <div>
-        <h2 className="text-xl font-bold text-slate-900 tracking-tight">
+        <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
           Executive Retail Analytics & Intelligence
         </h2>
-        <p className="text-xs text-slate-500">
+        <p className="text-xs text-slate-500 dark:text-slate-400">
           Geographic sales density, omnichannel conversions, and customer footfall telemetry
         </p>
       </div>
@@ -45,10 +45,10 @@ export const AnalyticsTab: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <Card className="lg:col-span-2">
           <div className="mb-4">
-            <h3 className="text-base font-bold text-slate-900 tracking-tight">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 tracking-tight">
               Regional Retail Store Sales Revenue
             </h3>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Comparing flagship metro hubs across India (July 2026)
             </p>
           </div>
@@ -97,20 +97,20 @@ export const AnalyticsTab: React.FC = () => {
         {/* Omnichannel Channel Mix */}
         <Card>
           <div className="mb-4">
-            <h3 className="text-base font-bold text-slate-900 tracking-tight">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 tracking-tight">
               Channel Contribution
             </h3>
-            <p className="text-xs text-slate-500">Split by shopping touchpoint</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Split by shopping touchpoint</p>
           </div>
 
           <div className="space-y-4">
             {channelData.map((ch) => (
               <div
                 key={ch.channel}
-                className="p-3.5 bg-slate-50 border border-slate-100 rounded-xl space-y-2"
+                className="p-3.5 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-xl space-y-2"
               >
                 <div className="flex justify-between items-center text-xs">
-                  <span className="font-bold text-slate-900">{ch.channel}</span>
+                  <span className="font-bold text-slate-900 dark:text-slate-100">{ch.channel}</span>
                   <span className="font-extrabold text-[#122B52]">{ch.share}</span>
                 </div>
                 <div className="w-full bg-slate-200 rounded-full h-2">
@@ -119,7 +119,7 @@ export const AnalyticsTab: React.FC = () => {
                     style={{ width: ch.share }}
                   />
                 </div>
-                <div className="text-[10px] text-slate-500 text-right font-mono">
+                <div className="text-[10px] text-slate-500 dark:text-slate-400 text-right font-mono">
                   {formatINR(ch.sales)}
                 </div>
               </div>
@@ -131,10 +131,10 @@ export const AnalyticsTab: React.FC = () => {
       {/* Footfall Trend Line Chart */}
       <Card>
         <div className="mb-4">
-          <h3 className="text-base font-bold text-slate-900 tracking-tight">
+          <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 tracking-tight">
             Daily Store Footfall vs Sales Conversion Ratio
           </h3>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             Physical footfall sensors correlated with completed POS receipts
           </p>
         </div>

@@ -74,7 +74,7 @@ export function printOrderInvoice(order: Order) {
       <body>
         <div class="no-print">
           <div>
-            <strong style="font-size: 13px; color: #0f172a;">Raymonds Tax Invoice</strong>
+            <strong style="font-size: 13px; color: #0f172a;">Raymond Tax Invoice</strong>
             <div style="font-size: 11px; color: #64748b;">Order ${order.id}</div>
           </div>
           <div style="display: flex; gap: 8px;">
@@ -86,7 +86,7 @@ export function printOrderInvoice(order: Order) {
 
         <div class="header">
           <div>
-            <div class="brand">RAYMONDS</div>
+            <div class="brand">RAYMOND</div>
             <div class="subtitle">Retail Operations & Tax Invoice</div>
           </div>
           <div class="title">
@@ -136,8 +136,8 @@ export function printOrderInvoice(order: Order) {
         </div>
 
         <div class="footer">
-          <p>Raymonds Limited • GSTIN: 27AAACS1234F1Z5 • Customer Care: 1800-209-2090</p>
-          <p>Thank you for shopping with Raymonds! This is a system-generated Tax Invoice.</p>
+          <p>Raymond Limited • GSTIN: 27AAACS1234F1Z5 • Customer Care: 1800-209-2090</p>
+          <p>Thank you for shopping with Raymond! This is a system-generated Tax Invoice.</p>
         </div>
 
         <script>
@@ -264,10 +264,10 @@ export function downloadReportFile(
 ) {
   const timestamp = new Date().toISOString().split('T')[0];
   const cleanTitle = reportTitle.replace(/[^a-zA-Z0-9]/g, '_');
-  const fileName = `Raymonds_${cleanTitle}_${timestamp}.${format.toLowerCase()}`;
+  const fileName = `Raymond_${cleanTitle}_${timestamp}.${format.toLowerCase()}`;
 
   if (format === 'CSV' || format === 'XLSX') {
-    let csvContent = `RAYMONDS RETAIL OPERATIONS REPORT\n`;
+    let csvContent = `RAYMOND RETAIL OPERATIONS REPORT\n`;
     csvContent += `Report Title,"${reportTitle}"\n`;
     csvContent += `Store Scope,"${storeName}"\n`;
     csvContent += `Export Date,"${new Date().toLocaleString()}"\n`;
@@ -329,7 +329,7 @@ export function downloadReportFile(
 
           <div class="header">
             <div>
-              <h1>RAYMONDS LIMITED</h1>
+              <h1>RAYMOND LIMITED</h1>
               <p>Enterprise Retail Audit & Operational Intelligence Center</p>
             </div>
             <div style="text-align: right; font-family: monospace; font-size: 12px; color: #64748b;">

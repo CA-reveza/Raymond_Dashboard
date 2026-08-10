@@ -58,7 +58,7 @@ export const InStoreDiscovery: React.FC<InStoreDiscoveryProps> = ({ customer, on
           setReviewModalConfig({
             isOpen: true,
             title: "In-Store Wi-Fi & Shopping Check",
-            subtitle: "Is everything going smoothly during your visit to Raymonds?",
+            subtitle: "Is everything going smoothly during your visit to Shoppers Stop?",
             badgeText: "In-Store Quality Check",
             onComplete: () => {
               try {
@@ -76,7 +76,7 @@ export const InStoreDiscovery: React.FC<InStoreDiscoveryProps> = ({ customer, on
   const handleInitiateLogout = () => {
     setReviewModalConfig({
       isOpen: true,
-      title: "How was your overall Raymonds In-Store & Wi-Fi Experience?",
+      title: "How was your overall Shoppers Stop In-Store & Wi-Fi Experience?",
       subtitle: "Help us enhance future shopping visits before you disconnect.",
       badgeText: "Overall Shopping Review",
       onComplete: () => {
@@ -127,7 +127,7 @@ export const InStoreDiscovery: React.FC<InStoreDiscoveryProps> = ({ customer, on
           <div className="flex items-center gap-4">
             <div>
               <div className="text-xl sm:text-2xl font-serif font-black tracking-wider uppercase text-[#1a1a1a]">
-                RAYMONDS
+                SHOPPERS STOP
               </div>
               <div className="text-[10px] font-bold tracking-[0.2em] text-[#122B52] uppercase hidden sm:block">
                 IN-STORE DIGITAL COMPANION
@@ -575,7 +575,7 @@ export const InStoreDiscovery: React.FC<InStoreDiscoveryProps> = ({ customer, on
                 25% OFF
               </div>
               <p className="text-xs text-[#666052] mt-0.5">
-                Unlocked through Raymonds In-Store Wi-Fi • Valid for this store session
+                Unlocked through Shoppers Stop In-Store Wi-Fi • Valid for this store session
               </p>
             </div>
           </div>
@@ -596,7 +596,7 @@ export const InStoreDiscovery: React.FC<InStoreDiscoveryProps> = ({ customer, on
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-[#f0ebd9] pb-6">
           <div className="text-left">
             <div className="font-serif font-bold text-sm text-[#1a1a1a] uppercase">
-              RAYMONDS IN-STORE WI-FI
+              SHOPPERS STOP IN-STORE WI-FI
             </div>
             <p className="text-xs text-[#888172]">
               {STORE_INFO.name} • {STORE_INFO.address}
@@ -616,7 +616,7 @@ export const InStoreDiscovery: React.FC<InStoreDiscoveryProps> = ({ customer, on
         </div>
 
         <p className="text-[11px] text-[#888172]">
-          © 2026 Raymonds Ltd. Wi-Fi captive portal designed for in-store guest navigation and customer rewards.
+          © 2026 Shoppers Stop Ltd. Wi-Fi captive portal designed for in-store guest navigation and customer rewards.
         </p>
       </footer>
 

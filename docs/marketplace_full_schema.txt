@@ -1,7 +1,7 @@
 Marketplace Supabase project — public schema (from information_schema.columns)
 Confirmed via SQL query in Supabase SQL Editor.
 
-Relevant tables for the Raymonds dashboard's Marketplace Activity panel:
+Relevant tables for the Shoppers Stop dashboard's Marketplace Activity panel:
 
 app_users:         id, full_name, phone, email, created_at
 bookings:          id, user_id, show_id, seat_ids[], num_seats, base_amount,

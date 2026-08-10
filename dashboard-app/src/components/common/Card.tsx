@@ -16,7 +16,7 @@ export const Card: React.FC<CardProps> = ({
   return (
     <div
       onClick={onClick}
-      className={`bg-white rounded-[18px] border border-gray-100 p-6 shadow-xs ${
+      className={`bg-white dark:bg-[#141F38] rounded-[18px] border border-gray-100 dark:border-white/10 p-6 shadow-xs ${
         hoverEffect ? 'hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer' : ''
       } ${className}`}
     >
@@ -56,9 +56,9 @@ export const MetricCard: React.FC<MetricCardProps> = ({
           {isPositive ? '+' : ''}{change}
         </span>
       </div>
-      <p className="text-gray-500 text-sm font-medium">{title}</p>
-      <p className="text-2xl font-bold text-gray-900 mt-1">{value}</p>
-      {subtext && <p className="text-[11px] text-gray-400 mt-1 font-medium">{subtext}</p>}
+      <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">{title}</p>
+      <p className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-1">{value}</p>
+      {subtext && <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-1 font-medium">{subtext}</p>}
     </Card>
   );
 };

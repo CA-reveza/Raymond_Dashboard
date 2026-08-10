@@ -1,6 +1,6 @@
 {
-  "name": "Raymonds Admin Dashboard",
-  "description": "Enterprise retail management platform for Raymonds with Orders, Inventory, Customers, Coupons, Analytics, Reports, Help Center, and Settings.",
+  "name": "MyRaymond Admin Dashboard",
+  "description": "Enterprise retail management platform for Raymond with Orders, Inventory, Customers, Coupons, Analytics, Reports, Help Center, and Settings.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

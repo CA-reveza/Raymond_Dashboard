@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { TabType } from '../../types';
 import { STORE_LOCATIONS } from '../../data/mockData';
+import raymondLogo from '../../assets/raymond-logo.png';
 
 interface SidebarProps {
   activeTab: TabType;
@@ -60,46 +61,46 @@ export const Sidebar: React.FC<SidebarProps> = ({
       )}
 
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-40 w-64 bg-white text-gray-700 flex flex-col border-r border-gray-200 transition-transform duration-300 ease-in-out lg:translate-x-0 ${
+        className={`fixed top-0 bottom-0 left-0 z-40 w-64 bg-white dark:bg-[#0F1B33] text-gray-700 dark:text-gray-300 flex flex-col border-r border-gray-200 dark:border-white/10 transition-transform duration-300 ease-in-out lg:translate-x-0 ${
           isOpenMobile ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
         }`}
       >
         {/* Brand Header */}
-        <div className="p-5 border-b border-gray-100 flex items-center justify-between">
+        <div className="p-5 border-b border-gray-100 dark:border-white/10 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-[#2D74B2] flex items-center justify-center text-white font-black text-lg shadow-xs tracking-tighter">
-              SS
+            <div className="w-9 h-9 rounded-lg bg-white border border-gray-100 dark:border-white/10 flex items-center justify-center shadow-xs overflow-hidden shrink-0">
+              <img src={raymondLogo} alt="Raymond" className="w-full h-full object-contain" />
             </div>
             <div>
-              <div className="font-extrabold text-gray-900 text-sm tracking-wider uppercase">
-                RAYMONDS
+              <div className="font-extrabold text-gray-900 dark:text-white text-sm tracking-wider uppercase">
+                MY RAYMOND
               </div>
-              <div className="text-[10px] text-gray-400 uppercase tracking-widest font-mono">
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 uppercase tracking-widest font-mono">
                 Retail Dashboard
               </div>
             </div>
           </div>
           <button
             onClick={() => setIsOpenMobile(false)}
-            className="lg:hidden text-gray-400 hover:text-gray-700 p-1 rounded-lg cursor-pointer"
+            className="lg:hidden text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 p-1 rounded-lg cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Store Selector */}
-        <div className="p-4 border-b border-gray-100 bg-gray-50/50">
-          <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1.5 flex items-center gap-1.5">
+        <div className="p-4 border-b border-gray-100 dark:border-white/10 bg-gray-50/50 dark:bg-white/[0.02]">
+          <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 block mb-1.5 flex items-center gap-1.5">
             <Store className="w-3.5 h-3.5 text-[#2D74B2]" /> Active Branch
           </label>
           <div className="relative">
             <select
               value={selectedStore}
               onChange={(e) => setSelectedStore(e.target.value)}
-              className="w-full bg-white hover:bg-gray-50 text-xs text-gray-800 font-semibold py-2 pl-3 pr-8 rounded-lg border border-gray-200 focus:border-[#2D74B2] focus:ring-1 focus:ring-[#2D74B2] appearance-none cursor-pointer truncate transition-colors shadow-2xs"
+              className="w-full bg-white dark:bg-[#141F38] hover:bg-gray-50 dark:hover:bg-[#182444] text-xs text-gray-800 dark:text-gray-200 font-semibold py-2 pl-3 pr-8 rounded-lg border border-gray-200 dark:border-white/10 focus:border-[#2D74B2] focus:ring-1 focus:ring-[#2D74B2] appearance-none cursor-pointer truncate transition-colors shadow-2xs"
             >
               {STORE_LOCATIONS.map((loc) => (
-                <option key={loc} value={loc} className="bg-white text-gray-800">
+                <option key={loc} value={loc} className="bg-white dark:bg-[#141F38] text-gray-800 dark:text-gray-200">
                   {loc}
                 </option>
               ))}
@@ -110,7 +111,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
         {/* Navigation Links */}
         <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto custom-scrollbar">
-          <div className="px-3 pb-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+          <div className="px-3 pb-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500">
             Main Navigation
           </div>
           {menuItems.map((item) => {
@@ -124,14 +125,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 }}
                 className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg font-medium text-sm transition-all duration-150 cursor-pointer group ${
                   isActive
-                    ? 'bg-rose-50 text-[#2D74B2] font-semibold'
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                    ? 'bg-rose-50 dark:bg-[#2D74B2]/15 text-[#2D74B2] font-semibold'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-white/5'
                 }`}
               >
                 <div className="flex items-center gap-3">
                   <span
                     className={`transition-colors ${
-                      isActive ? 'text-[#2D74B2]' : 'text-gray-400 group-hover:text-gray-600'
+                      isActive ? 'text-[#2D74B2]' : 'text-gray-400 dark:text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-300'
                     }`}
                   >
                     {item.icon}
@@ -142,8 +143,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   <span
                     className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase ${
                       item.badge === 'Low'
-                        ? 'bg-amber-50 text-amber-600 border border-amber-200/60'
-                        : 'bg-rose-100 text-[#2D74B2]'
+                        ? 'bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-200/60 dark:border-amber-500/20'
+                        : 'bg-rose-100 dark:bg-[#2D74B2]/20 text-[#2D74B2] dark:text-sky-300'
                     }`}
                   >
                     {item.badge}
@@ -155,14 +156,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </nav>
 
         {/* User Footer */}
-        <div className="p-3.5 border-t border-gray-200 bg-gray-50/50 flex items-center justify-between">
+        <div className="p-3.5 border-t border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-white/[0.02] flex items-center justify-between">
           <div className="flex items-center gap-3 overflow-hidden">
             <div className="w-8 h-8 rounded-full bg-[#2D74B2]/10 text-[#2D74B2] font-bold text-xs flex items-center justify-center border border-[#2D74B2]/20 shrink-0">
               JS
             </div>
             <div className="truncate">
-              <div className="text-xs font-bold text-gray-900 truncate">Jordan Smith</div>
-              <div className="text-[10px] text-gray-500 truncate">Store Manager</div>
+              <div className="text-xs font-bold text-gray-900 dark:text-gray-100 truncate">Jordan Smith</div>
+              <div className="text-[10px] text-gray-500 dark:text-gray-500 truncate">Store Manager</div>
             </div>
           </div>
         </div>

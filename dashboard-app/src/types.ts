@@ -12,9 +12,9 @@ export type TabType = 'feedback' |
 
 export type LoyaltyTier = 'Black' | 'Platinum' | 'Golden' | 'Silver';
 
-export type OrderStatus = 'Delivered' | 'In Transit' | 'Processing' | 'Returned' | 'Cancelled';
+export type OrderStatus = 'Delivered' | 'In Transit' | 'Processing' | 'Returned' | 'Cancelled' | 'Pending' | 'Confirmed';
 
-export type PaymentMethod = 'UPI' | 'Credit Card' | 'First Citizen Pay' | 'Store Card' | 'COD';
+export type PaymentMethod = 'UPI' | 'Credit Card' | 'First Citizen Pay' | 'Store Card' | 'COD' | 'Razorpay';
 
 export type ReturnReason = 'Damaged' | 'Wrong Size' | 'Wrong Product' | 'Customer Changed Mind' | 'Other';
 
@@ -60,6 +60,10 @@ export interface Order {
   status: OrderStatus;
   shippingAddress: string;
   trackingNumber?: string;
+  /** Set only for orders placed through an external connector (e.g. Claude's
+   *  MCP integration) rather than in-store/kiosk/web checkout. Drives the
+   *  "Ordered through X Connector" badge in the Orders tab. */
+  channel?: string;
 }
 
 export interface Customer {
