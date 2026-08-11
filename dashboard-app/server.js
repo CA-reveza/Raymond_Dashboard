@@ -231,7 +231,7 @@ function addRedemptionToCoupon(couponCode, redemption) {
 
 let STORED_ORDERS = [
   {
-    id: 'SS-ORD-98421',
+    id: 'RAY-ORD-98421',
     customerName: 'Ananya Deshmukh',
     customerEmail: 'ananya.d@gmail.com',
     customerPhone: '+91 98201 44512',
@@ -257,7 +257,7 @@ let STORED_ORDERS = [
     trackingNumber: 'AWB-DEL-9928114',
   },
   {
-    id: 'SS-ORD-98420',
+    id: 'RAY-ORD-98420',
     customerName: 'Tanvi Agarwal',
     customerEmail: 'tanvi.agarwal@corp.in',
     customerPhone: '+91 98210 99887',
@@ -334,7 +334,7 @@ app.post('/api/customers', (req, res) => {
       customerEmail: cleanEmail,
       customerPhone: cleanPhone,
       loyaltyTier: 'Gold',
-      orderId: `SS-ORD-${Math.floor(98000 + Math.random() * 999)}`,
+      orderId: `RAY-ORD-${Math.floor(98000 + Math.random() * 999)}`,
       orderTotal: 0,
       discountSaved: 0,
       storeLocation: 'Mumbai - Malad West Flagship',
@@ -367,7 +367,7 @@ app.get('/api/coupons', async (req, res) => {
         customerEmail: r.customer_email || '',
         customerPhone: r.customer_phone || '',
         loyaltyTier:   r.loyalty_tier   || 'Gold First Citizen',
-        orderId:       r.order_id       || `SS-ORD-${Math.floor(98000 + Math.random() * 999)}`,
+        orderId:       r.order_id       || `RAY-ORD-${Math.floor(98000 + Math.random() * 999)}`,
         orderTotal:    Number(r.order_total   || 0),
         discountSaved: Number(r.discount_saved || 0),
         redeemedAt:    r.redeemed_at || 'Today',
@@ -441,13 +441,13 @@ app.post('/api/orders', (req, res) => {
   const body = req.body;
   if (!body) return res.status(400).json({ success: false });
 
-  const orderId = body.orderId || `SS-ORD-${Math.floor(98000 + Math.random() * 999)}`;
+  const orderId = body.orderId || `RAY-ORD-${Math.floor(98000 + Math.random() * 999)}`;
 
   // Format line items with high-res images
   const formattedItems = (body.items || []).map((itm, idx) => ({
     id: `ITM-${Date.now()}-${idx}`,
-    name: itm.product ? itm.product.name : (itm.name || 'Shoppers Stop Fashion Item'),
-    sku: itm.product ? itm.product.id : (itm.sku || `SS-SKU-${idx}`),
+    name: itm.product ? itm.product.name : (itm.name || 'Raymonds Fashion Item'),
+    sku: itm.product ? itm.product.id : (itm.sku || `RAY-SKU-${idx}`),
     category: itm.product ? itm.product.category : (itm.category || 'In-Store Kiosk'),
     quantity: itm.quantity || 1,
     unitPrice: itm.product ? itm.product.price : (itm.unitPrice || 1999),
@@ -474,7 +474,7 @@ app.post('/api/orders', (req, res) => {
     paymentMethod: body.paymentMethod === 'upi_qr' ? 'UPI QR Code' : (body.paymentMethod || 'Kiosk Express Pay'),
     status: 'In-Store Kiosk',
     shippingAddress: body.deliveryAddress || body.fittingRoomNo || body.pickupCounter || 'Store Pick-up Counter B',
-    trackingNumber: `AWB-SS-${Math.floor(100000 + Math.random() * 900000)}`
+    trackingNumber: `AWB-RAY-${Math.floor(100000 + Math.random() * 900000)}`
   };
 
   // Prepend to top of orders list
@@ -496,7 +496,7 @@ app.post('/api/orders', (req, res) => {
 // POST Coupon Redemption (From Captive Portal or Checkout)
 app.post('/api/redemptions', (req, res) => {
   const { couponCode, customerName, customerEmail, customerPhone, orderId, orderTotal, discountSaved, loyaltyTier, storeLocation } = req.body;
-  const cleanCode = (couponCode || 'SHOPPERS500').trim().toUpperCase();
+  const cleanCode = (couponCode || 'RAYMONDS500').trim().toUpperCase();
 
   const redemption = {
     id: `RED-${Date.now().toString().slice(-6)}`,
@@ -505,7 +505,7 @@ app.post('/api/redemptions', (req, res) => {
     customerEmail: customerEmail || 'guest@ss-wifi.in',
     customerPhone: customerPhone || '+91 98765 43210',
     loyaltyTier: loyaltyTier || 'Gold',
-    orderId: orderId || `SS-ORD-${Math.floor(98000 + Math.random() * 999)}`,
+    orderId: orderId || `RAY-ORD-${Math.floor(98000 + Math.random() * 999)}`,
     orderTotal: orderTotal || 4999,
     discountSaved: discountSaved || 500,
     storeLocation: storeLocation || 'Mumbai - Malad West Flagship',
@@ -543,7 +543,7 @@ app.get('/api/redemptions', async (req, res) => {
           customerEmail: r.customer_email || '',
           customerPhone: r.customer_phone || '',
           loyaltyTier:   r.loyalty_tier   || 'Gold First Citizen',
-          orderId:       r.order_id       || `SS-ORD-${Math.floor(98000 + Math.random() * 999)}`,
+          orderId:       r.order_id       || `RAY-ORD-${Math.floor(98000 + Math.random() * 999)}`,
           orderTotal:    Number(r.order_total   || 0),
           discountSaved: Number(r.discount_saved || 0),
           redeemedAt:    r.redeemed_at || 'Today',

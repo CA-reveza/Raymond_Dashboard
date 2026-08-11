@@ -3,6 +3,7 @@ import { Wifi, Phone, Lock, User, Mail, Sparkles, ShieldCheck, ArrowRight, Check
 import { STORE_INFO } from '../data/mockStoreData';
 import { CustomerInfo } from '../types';
 import { apiUrl } from '../config/api';
+import raymondsLogo from '../assets/raymonds-logo.png';
 
 interface GuestAccessFormProps {
   onSuccessNewUser: (customer: CustomerInfo) => void;
@@ -38,7 +39,7 @@ export const GuestAccessForm: React.FC<GuestAccessFormProps> = ({ onSuccessNewUs
     const loadStored = async () => {
       let customersArr: any[] = [];
       try {
-        const local = localStorage.getItem('SS_STORED_CUSTOMERS');
+        const local = localStorage.getItem('RAYMONDS_STORED_CUSTOMERS');
         if (local) customersArr = JSON.parse(local);
       } catch (e) {}
 
@@ -264,8 +265,8 @@ export const GuestAccessForm: React.FC<GuestAccessFormProps> = ({ onSuccessNewUs
             },
             timestamp: Date.now()
           };
-          localStorage.setItem('ss_wifi_telemetry_event', JSON.stringify(eventPayload));
-          const channel = new BroadcastChannel('ss_wifi_channel');
+          localStorage.setItem('raymonds_wifi_telemetry_event', JSON.stringify(eventPayload));
+          const channel = new BroadcastChannel('raymonds_wifi_channel');
           channel.postMessage(eventPayload);
         } catch (e) {}
 
@@ -276,7 +277,7 @@ export const GuestAccessForm: React.FC<GuestAccessFormProps> = ({ onSuccessNewUs
         const newCustObj = {
           id: `CUST-${Math.floor(1000 + Math.random() * 9000)}`,
           name: cleanName,
-          email: cleanEmail || `${cleanPhone}@ss-wifi.in`,
+          email: cleanEmail || `${cleanPhone}@raymonds-wifi.in`,
           phone: cleanPhone.startsWith('+91') ? cleanPhone : `+91 ${cleanPhone}`,
           loyaltyTier: 'Black',
           loyaltyPoints: 1250,
@@ -295,12 +296,12 @@ export const GuestAccessForm: React.FC<GuestAccessFormProps> = ({ onSuccessNewUs
         }).catch(() => {});
 
         try {
-          const existingStr = localStorage.getItem('SS_STORED_CUSTOMERS');
+          const existingStr = localStorage.getItem('RAYMONDS_STORED_CUSTOMERS');
           let existingArr = existingStr ? JSON.parse(existingStr) : [];
           if (!Array.isArray(existingArr)) existingArr = [];
           existingArr = existingArr.filter((c: any) => c.name.toLowerCase() !== cleanName.toLowerCase());
           existingArr = [newCustObj, ...existingArr];
-          localStorage.setItem('SS_STORED_CUSTOMERS', JSON.stringify(existingArr));
+          localStorage.setItem('RAYMONDS_STORED_CUSTOMERS', JSON.stringify(existingArr));
         } catch (e) {}
 
         try {
@@ -315,8 +316,8 @@ export const GuestAccessForm: React.FC<GuestAccessFormProps> = ({ onSuccessNewUs
             },
             timestamp: Date.now()
           };
-          localStorage.setItem('ss_wifi_telemetry_event', JSON.stringify(eventPayload));
-          const channel = new BroadcastChannel('ss_wifi_channel');
+          localStorage.setItem('raymonds_wifi_telemetry_event', JSON.stringify(eventPayload));
+          const channel = new BroadcastChannel('raymonds_wifi_channel');
           channel.postMessage(eventPayload);
         } catch (e) {}
 
@@ -381,11 +382,10 @@ export const GuestAccessForm: React.FC<GuestAccessFormProps> = ({ onSuccessNewUs
             <div className="text-center mb-6">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#122B52]/10 text-[#122B52] text-xs font-bold uppercase tracking-wider mb-2">
                 <Wifi className="w-3.5 h-3.5" />
-                <span>{activeTab === 'new' ? 'Shoppers Stop Guest Wi-Fi' : 'First Citizen Member Login'}</span>
+                <span>{activeTab === 'new' ? 'Raymonds Guest Wi-Fi' : 'First Citizen Member Login'}</span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-serif font-black text-[#1a1a1a] tracking-tight">
-                SHOPPERS STOP
-              </h1>
+              <img src={raymondsLogo} alt="Raymonds" className="h-12 sm:h-14 w-auto mx-auto mb-1" />
+              <p className="text-xs text-[#777063] font-semibold tracking-widest -mt-1">MY RAYMOND.com</p>
               <p className="text-xs text-[#777063] uppercase tracking-widest font-semibold mt-0.5">
                 {activeTab === 'new' ? 'NEW GUEST REGISTRATION & REWARD' : 'RESUME MEMBER WI-FI SESSION'}
               </p>
@@ -408,7 +408,7 @@ export const GuestAccessForm: React.FC<GuestAccessFormProps> = ({ onSuccessNewUs
                     {connectingStep === 3 && (activeTab === 'returning' ? 'Session Resumed! Loading Companion...' : 'Connection Established! Unlocking Voucher...')}
                   </h3>
                   <p className="text-xs text-[#777063] mt-1">
-                    Welcome to Shoppers Stop • {fullName || 'Valued Guest'}
+                    Welcome to Raymonds • {fullName || 'Valued Guest'}
                   </p>
                 </div>
               </div>
@@ -577,7 +577,7 @@ export const GuestAccessForm: React.FC<GuestAccessFormProps> = ({ onSuccessNewUs
                         className="mt-0.5 rounded border-[#c5beaf] text-[#122B52] focus:ring-[#122B52]"
                       />
                       <span className="text-xs text-[#555045] leading-snug">
-                        I want to receive exclusive offers, fashion updates & VIP privileges from Shoppers Stop.
+                        I want to receive exclusive offers, fashion updates & VIP privileges from Raymonds.
                       </span>
                     </label>
                   )}

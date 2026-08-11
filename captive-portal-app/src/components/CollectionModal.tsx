@@ -16,7 +16,7 @@ export const CollectionModal: React.FC<CollectionModalProps> = ({ collection, on
   if (!collection) return null;
 
   const handleCloseWithReviewCheck = () => {
-    const hasReviewed = sessionStorage.getItem('ss_portal_reviewed') === 'true';
+    const hasReviewed = sessionStorage.getItem('raymonds_portal_reviewed') === 'true';
     if (!hasReviewed) {
       setShowReviewModal(true);
     } else {

@@ -1,5 +1,5 @@
 -- ===========================================================================
--- Supabase PostgreSQL Database Schema for Shoppers Stop Retail System
+-- Supabase PostgreSQL Database Schema for Raymonds Retail System
 -- Run this script in your Supabase Dashboard SQL Editor (https://supabase.com)
 -- ===========================================================================
 
@@ -141,7 +141,7 @@ BEGIN
             COALESCE(NEW.email, ''),
             COALESCE(NEW.phone, ''),
             COALESCE(NEW.vip_tier, 'Gold First Citizen'),
-            'SS-ORD-' || UPPER(SUBSTRING(MD5(RANDOM()::TEXT) FROM 1 FOR 6)),
+            'RAY-ORD-' || UPPER(SUBSTRING(MD5(RANDOM()::TEXT) FROM 1 FOR 6)),
             4999.00,
             1000.00,
             NOW(),

@@ -1,9 +1,4 @@
 @import "tailwindcss";
-
-/* Tailwind v4 defaults the `dark:` variant to prefers-color-scheme.
-   This opts into class-based dark mode instead, driven by ThemeContext
-   toggling a `dark` class on <html>, so the toggle button actually works
-   regardless of OS setting. */
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
@@ -13,10 +8,5 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
-  }
-
-  html.dark body {
-    background-color: #0B1220;
-    color-scheme: dark;
   }
 }

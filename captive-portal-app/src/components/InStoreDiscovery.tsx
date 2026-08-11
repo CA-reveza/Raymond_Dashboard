@@ -23,6 +23,7 @@ import { CollectionModal } from './CollectionModal';
 import { BrandLocatorModal } from './BrandLocatorModal';
 import { FloorDetailModal } from './FloorDetailModal';
 import { VoucherModal } from './VoucherModal';
+import raymondsLogo from '../assets/raymonds-logo.png';
 import { ReviewModal } from './ReviewModal';
 
 interface InStoreDiscoveryProps {
@@ -53,16 +54,16 @@ export const InStoreDiscovery: React.FC<InStoreDiscoveryProps> = ({ customer, on
   useEffect(() => {
     const timer = setTimeout(() => {
       try {
-        const alreadyChecked = sessionStorage.getItem('ss_portal_pulse_checked') === 'true';
+        const alreadyChecked = sessionStorage.getItem('raymonds_portal_pulse_checked') === 'true';
         if (!alreadyChecked) {
           setReviewModalConfig({
             isOpen: true,
             title: "In-Store Wi-Fi & Shopping Check",
-            subtitle: "Is everything going smoothly during your visit to Shoppers Stop?",
+            subtitle: "Is everything going smoothly during your visit to Raymonds?",
             badgeText: "In-Store Quality Check",
             onComplete: () => {
               try {
-                sessionStorage.setItem('ss_portal_pulse_checked', 'true');
+                sessionStorage.setItem('raymonds_portal_pulse_checked', 'true');
               } catch (e) {}
             }
           });
@@ -76,7 +77,7 @@ export const InStoreDiscovery: React.FC<InStoreDiscoveryProps> = ({ customer, on
   const handleInitiateLogout = () => {
     setReviewModalConfig({
       isOpen: true,
-      title: "How was your overall Shoppers Stop In-Store & Wi-Fi Experience?",
+      title: "How was your overall Raymonds In-Store & Wi-Fi Experience?",
       subtitle: "Help us enhance future shopping visits before you disconnect.",
       badgeText: "Overall Shopping Review",
       onComplete: () => {
@@ -125,12 +126,12 @@ export const InStoreDiscovery: React.FC<InStoreDiscoveryProps> = ({ customer, on
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
           {/* Logo & Greeting */}
           <div className="flex items-center gap-4">
-            <div>
-              <div className="text-xl sm:text-2xl font-serif font-black tracking-wider uppercase text-[#1a1a1a]">
-                SHOPPERS STOP
-              </div>
-              <div className="text-[10px] font-bold tracking-[0.2em] text-[#122B52] uppercase hidden sm:block">
-                IN-STORE DIGITAL COMPANION
+            <div className="flex items-center gap-2.5">
+              <img src={raymondsLogo} alt="Raymonds" className="h-9 sm:h-10 w-auto" />
+              <div className="hidden sm:block">
+                <div className="text-[10px] font-bold tracking-[0.2em] text-[#122B52] uppercase">
+                  IN-STORE DIGITAL COMPANION
+                </div>
               </div>
             </div>
 
@@ -575,7 +576,7 @@ export const InStoreDiscovery: React.FC<InStoreDiscoveryProps> = ({ customer, on
                 25% OFF
               </div>
               <p className="text-xs text-[#666052] mt-0.5">
-                Unlocked through Shoppers Stop In-Store Wi-Fi • Valid for this store session
+                Unlocked through Raymonds In-Store Wi-Fi • Valid for this store session
               </p>
             </div>
           </div>
@@ -596,7 +597,7 @@ export const InStoreDiscovery: React.FC<InStoreDiscoveryProps> = ({ customer, on
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-[#f0ebd9] pb-6">
           <div className="text-left">
             <div className="font-serif font-bold text-sm text-[#1a1a1a] uppercase">
-              SHOPPERS STOP IN-STORE WI-FI
+              RAYMONDS IN-STORE WI-FI
             </div>
             <p className="text-xs text-[#888172]">
               {STORE_INFO.name} • {STORE_INFO.address}
@@ -616,7 +617,7 @@ export const InStoreDiscovery: React.FC<InStoreDiscoveryProps> = ({ customer, on
         </div>
 
         <p className="text-[11px] text-[#888172]">
-          © 2026 Shoppers Stop Ltd. Wi-Fi captive portal designed for in-store guest navigation and customer rewards.
+          © 2026 Raymonds Ltd. Wi-Fi captive portal designed for in-store guest navigation and customer rewards.
         </p>
       </footer>
 

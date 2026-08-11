@@ -234,7 +234,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
         </div>
         <div className="flex items-center gap-3 text-xs text-gray-300 border-t md:border-t-0 border-gray-700/60 pt-3 md:pt-0 w-full md:w-auto justify-between md:justify-end">
           <div>
-            <span className="text-gray-400 dark:text-gray-500">Total Store Footfall Today:</span>{' '}
+            <span className="text-gray-400">Total Store Footfall Today:</span>{' '}
             <strong className="text-white font-mono">14,280 visitors</strong>
           </div>
           <Button
@@ -251,75 +251,75 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
       {/* 5 KPI Stat Cards Header Row */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
         {/* Sales */}
-        <div className="bg-white dark:bg-[#141F38] rounded-[18px] border border-gray-100 dark:border-white/10 p-4 shadow-2xs hover:shadow-md transition-all cursor-pointer flex items-center justify-between" onClick={() => onNavigateTab('reports')}>
+        <div className="bg-white rounded-[18px] border border-gray-100 p-4 shadow-2xs hover:shadow-md transition-all cursor-pointer flex items-center justify-between" onClick={() => onNavigateTab('reports')}>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
               <TrendingUp className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Sales</p>
-              <p className="text-lg font-bold text-gray-900 dark:text-gray-100 mt-0.5">{formatINR(metrics.totalSales)}</p>
+              <p className="text-xs text-gray-500 font-medium">Sales</p>
+              <p className="text-lg font-bold text-gray-900 mt-0.5">{formatINR(metrics.totalSales)}</p>
             </div>
           </div>
-          <ChevronRight className="w-4 h-4 text-gray-400 dark:text-gray-500 hidden sm:block" />
+          <ChevronRight className="w-4 h-4 text-gray-400 hidden sm:block" />
         </div>
 
         {/* Orders */}
-        <div className="bg-white dark:bg-[#141F38] rounded-[18px] border border-gray-100 dark:border-white/10 p-4 shadow-2xs hover:shadow-md transition-all cursor-pointer flex items-center justify-between" onClick={() => onNavigateTab('orders')}>
+        <div className="bg-white rounded-[18px] border border-gray-100 p-4 shadow-2xs hover:shadow-md transition-all cursor-pointer flex items-center justify-between" onClick={() => onNavigateTab('orders')}>
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
               <ShoppingBag className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Orders</p>
-              <p className="text-lg font-bold text-gray-900 dark:text-gray-100 mt-0.5">{metrics.totalOrders.toLocaleString('en-IN')}</p>
+              <p className="text-xs text-gray-500 font-medium">Orders</p>
+              <p className="text-lg font-bold text-gray-900 mt-0.5">{metrics.totalOrders.toLocaleString('en-IN')}</p>
             </div>
           </div>
-          <ChevronRight className="w-4 h-4 text-gray-400 dark:text-gray-500 hidden sm:block" />
+          <ChevronRight className="w-4 h-4 text-gray-400 hidden sm:block" />
         </div>
 
         {/* Products */}
-        <div className="bg-white dark:bg-[#141F38] rounded-[18px] border border-gray-100 dark:border-white/10 p-4 shadow-2xs hover:shadow-md transition-all cursor-pointer flex items-center justify-between" onClick={() => onNavigateTab('inventory')}>
+        <div className="bg-white rounded-[18px] border border-gray-100 p-4 shadow-2xs hover:shadow-md transition-all cursor-pointer flex items-center justify-between" onClick={() => onNavigateTab('inventory')}>
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
               <Package className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Products</p>
-              <p className="text-lg font-bold text-gray-900 dark:text-gray-100 mt-0.5">{metrics.totalProducts.toLocaleString('en-IN')}</p>
+              <p className="text-xs text-gray-500 font-medium">Products</p>
+              <p className="text-lg font-bold text-gray-900 mt-0.5">{metrics.totalProducts.toLocaleString('en-IN')}</p>
             </div>
           </div>
-          <ChevronRight className="w-4 h-4 text-gray-400 dark:text-gray-500 hidden sm:block" />
+          <ChevronRight className="w-4 h-4 text-gray-400 hidden sm:block" />
         </div>
 
         {/* Customers */}
-        <div className="bg-white dark:bg-[#141F38] rounded-[18px] border border-gray-100 dark:border-white/10 p-4 shadow-2xs hover:shadow-md transition-all cursor-pointer flex items-center justify-between" onClick={() => onNavigateTab('customers')}>
+        <div className="bg-white rounded-[18px] border border-gray-100 p-4 shadow-2xs hover:shadow-md transition-all cursor-pointer flex items-center justify-between" onClick={() => onNavigateTab('customers')}>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
               <Users className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Customers</p>
-              <p className="text-lg font-bold text-gray-900 dark:text-gray-100 mt-0.5">{metrics.totalCustomers.toLocaleString('en-IN')}</p>
+              <p className="text-xs text-gray-500 font-medium">Customers</p>
+              <p className="text-lg font-bold text-gray-900 mt-0.5">{metrics.totalCustomers.toLocaleString('en-IN')}</p>
             </div>
           </div>
-          <ChevronRight className="w-4 h-4 text-gray-400 dark:text-gray-500 hidden sm:block" />
+          <ChevronRight className="w-4 h-4 text-gray-400 hidden sm:block" />
         </div>
 
         {/* Overall Feedback */}
-        <div className="bg-white dark:bg-[#141F38] rounded-[18px] border border-amber-100 p-4 shadow-2xs hover:shadow-md transition-all cursor-pointer flex items-center justify-between col-span-2 sm:col-span-1 bg-gradient-to-br from-white to-amber-50/20" onClick={() => onNavigateTab('feedback')}>
+        <div className="bg-white rounded-[18px] border border-amber-100 p-4 shadow-2xs hover:shadow-md transition-all cursor-pointer flex items-center justify-between col-span-2 sm:col-span-1 bg-gradient-to-br from-white to-amber-50/20" onClick={() => onNavigateTab('feedback')}>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-500/10 text-amber-500 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center shrink-0">
               <Star className="w-5 h-5 fill-amber-500 text-amber-500" />
             </div>
             <div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Overall Feedback</p>
-              <p className="text-lg font-bold text-gray-900 dark:text-gray-100 mt-0.5 flex items-center gap-1">
-                4.8/5 <span className="text-amber-500 text-xs">★</span> <span className="text-xs text-gray-400 dark:text-gray-500 font-normal">(242)</span>
+              <p className="text-xs text-gray-500 font-medium">Overall Feedback</p>
+              <p className="text-lg font-bold text-gray-900 mt-0.5 flex items-center gap-1">
+                4.8/5 <span className="text-amber-500 text-xs">★</span> <span className="text-xs text-gray-400 font-normal">(242)</span>
               </p>
             </div>
           </div>
-          <ChevronRight className="w-4 h-4 text-gray-400 dark:text-gray-500 hidden sm:block" />
+          <ChevronRight className="w-4 h-4 text-gray-400 hidden sm:block" />
         </div>
       </div>
 
@@ -330,19 +330,19 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
           <div>
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-base font-bold text-gray-900 dark:text-gray-100 tracking-tight">
+                <h3 className="text-base font-bold text-gray-900 tracking-tight">
                   Orders Status
                 </h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Monthly breakdown of sales, orders, and returns</p>
+                <p className="text-xs text-gray-500">Monthly breakdown of sales, orders, and returns</p>
               </div>
               <div className="flex items-center gap-3 text-xs">
-                <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400 font-medium">
+                <span className="flex items-center gap-1 text-gray-600 font-medium">
                   <span className="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block" /> Orders
                 </span>
-                <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400 font-medium">
+                <span className="flex items-center gap-1 text-gray-600 font-medium">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block" /> Sales
                 </span>
-                <span className="flex items-center gap-1 text-gray-600 dark:text-gray-400 font-medium">
+                <span className="flex items-center gap-1 text-gray-600 font-medium">
                   <span className="w-2.5 h-2.5 rounded-full bg-pink-500 inline-block" /> Returns
                 </span>
               </div>
@@ -423,14 +423,14 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
         <Card className="lg:col-span-5 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-base font-bold text-gray-900 dark:text-gray-100 tracking-tight">
+              <h3 className="text-base font-bold text-gray-900 tracking-tight">
                 Top Sales Products
               </h3>
               <div className="relative">
                 <select
                   value={selectedMonth}
                   onChange={(e) => setSelectedMonth(e.target.value)}
-                  className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-xs font-semibold text-gray-700 dark:text-gray-300 py-1.5 px-2.5 rounded-lg focus:outline-none cursor-pointer"
+                  className="bg-gray-50 border border-gray-200 text-xs font-semibold text-gray-700 py-1.5 px-2.5 rounded-lg focus:outline-none cursor-pointer"
                 >
                   <option value="July 2026">July 2026</option>
                   <option value="June 2026">June 2026</option>
@@ -443,19 +443,19 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
               {topSalesProducts.map((prod) => (
                 <div
                   key={prod.id}
-                  className="flex items-center gap-3 p-2.5 bg-gray-50/60 hover:bg-gray-50 dark:hover:bg-white/5 border border-gray-100 dark:border-white/10 rounded-xl transition-all"
+                  className="flex items-center gap-3 p-2.5 bg-gray-50/60 hover:bg-gray-50 border border-gray-100 rounded-xl transition-all"
                 >
                   <img
                     src={prod.image}
                     alt={prod.name}
-                    className="w-12 h-12 rounded-lg object-cover bg-white dark:bg-[#141F38] border border-gray-200 dark:border-white/10 shrink-0"
+                    className="w-12 h-12 rounded-lg object-cover bg-white border border-gray-200 shrink-0"
                   />
                   <div className="overflow-hidden">
-                    <h4 className="text-xs font-bold text-gray-900 dark:text-gray-100 truncate">{prod.name}</h4>
+                    <h4 className="text-xs font-bold text-gray-900 truncate">{prod.name}</h4>
                     <p className="text-xs font-semibold text-blue-600 mt-0.5">
                       {formatINR(prod.price)}
                     </p>
-                    <span className="text-[10px] text-gray-400 dark:text-gray-500 font-medium">
+                    <span className="text-[10px] text-gray-400 font-medium">
                       {prod.discount}
                     </span>
                   </div>
@@ -470,10 +470,10 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
       <Card className="overflow-hidden">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="text-base font-bold text-gray-900 dark:text-gray-100 tracking-tight">
+            <h3 className="text-base font-bold text-gray-900 tracking-tight">
               Recent Orders
             </h3>
-            <p className="text-xs text-gray-500 dark:text-gray-400">Live transactions across omnichannel touchpoints</p>
+            <p className="text-xs text-gray-500">Live transactions across omnichannel touchpoints</p>
           </div>
           <Button
             variant="outline"
@@ -488,7 +488,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="bg-gray-50 dark:bg-white/5 text-gray-400 dark:text-gray-500 font-bold uppercase tracking-wider text-[11px] border-b border-gray-200 dark:border-white/10">
+              <tr className="bg-gray-50 text-gray-400 font-bold uppercase tracking-wider text-[11px] border-b border-gray-200">
                 <th className="py-3 px-4">Date</th>
                 <th className="py-3 px-4">Customer</th>
                 <th className="py-3 px-4">Product</th>
@@ -498,7 +498,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                 <th className="py-3 px-4 text-right">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100 dark:divide-white/10">
+            <tbody className="divide-y divide-gray-100">
               {recentOrders.map((order, idx) => {
                 const customerAvatars = [
                   'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100',
@@ -513,13 +513,13 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                 return (
                   <tr key={order.id} className="hover:bg-gray-50/60 transition-colors">
                     {/* Date */}
-                    <td className="py-3.5 px-4 font-medium text-gray-500 dark:text-gray-400 font-mono">
+                    <td className="py-3.5 px-4 font-medium text-gray-500 font-mono">
                       {(order.date || order.orderDate || '2026-08-04').toString().split(' ')[0].split('-').reverse().join('.')}
                     </td>
 
                     {/* Customer Name */}
                     <td className="py-3.5 px-4">
-                      <span className="font-semibold text-gray-900 dark:text-gray-100">{order.customerName}</span>
+                      <span className="font-semibold text-gray-900">{order.customerName}</span>
                     </td>
 
                     {/* Product item & thumbnail */}
@@ -529,14 +529,14 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                           <img
                             src={item.image}
                             alt={item.name}
-                            className="w-8 h-8 rounded-md object-cover bg-gray-100 dark:bg-white/10 border border-gray-200 dark:border-white/10 shrink-0"
+                            className="w-8 h-8 rounded-md object-cover bg-gray-100 border border-gray-200 shrink-0"
                           />
                         )}
                         <div className="flex items-center gap-1.5">
-                          <span className="font-medium text-gray-800 dark:text-gray-200 max-w-[160px] truncate">
+                          <span className="font-medium text-gray-800 max-w-[160px] truncate">
                             {item ? item.name : 'Store Item'}
                           </span>
-                          <span className="text-[10px] bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-400 font-bold px-1.5 py-0.5 rounded">
+                          <span className="text-[10px] bg-gray-100 text-gray-600 font-bold px-1.5 py-0.5 rounded">
                             x{item ? item.quantity : 1}
                           </span>
                         </div>
@@ -544,18 +544,18 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                     </td>
 
                     {/* Details / SKU */}
-                    <td className="py-3.5 px-4 text-gray-500 dark:text-gray-400 font-mono text-[11px]">
+                    <td className="py-3.5 px-4 text-gray-500 font-mono text-[11px]">
                       {item ? item.sku : order.id}
                     </td>
 
                     {/* Price */}
-                    <td className="py-3.5 px-4 font-bold text-gray-900 dark:text-gray-100">
+                    <td className="py-3.5 px-4 font-bold text-gray-900">
                       {formatINR(order.totalAmount)}
                     </td>
 
                     {/* Shipping Cost */}
-                    <td className="py-3.5 px-4 font-medium text-gray-600 dark:text-gray-400">
-                      {idx % 2 === 0 ? <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Free</span> : '₹100'}
+                    <td className="py-3.5 px-4 font-medium text-gray-600">
+                      {idx % 2 === 0 ? <span className="text-emerald-600 font-semibold">Free</span> : '₹100'}
                     </td>
 
                     {/* Action / Status Badge */}
@@ -564,10 +564,10 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                         onClick={() => onViewOrderDetails(order)}
                         className={`inline-flex items-center px-3 py-1 rounded-md text-xs font-semibold cursor-pointer ${
                           order.status === 'Delivered'
-                            ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100'
+                            ? 'bg-emerald-50 text-emerald-600 hover:bg-emerald-100'
                             : order.status === 'Processing' || order.status === 'In Transit'
-                            ? 'bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 hover:bg-amber-100'
-                            : 'bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-100'
+                            ? 'bg-amber-50 text-amber-600 hover:bg-amber-100'
+                            : 'bg-rose-50 text-rose-600 hover:bg-rose-100'
                         }`}
                       >
                         {order.status === 'Delivered' ? 'Shipped' : order.status}
@@ -585,10 +585,10 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
       <Card>
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="text-base font-bold text-gray-900 dark:text-gray-100 tracking-tight">
+            <h3 className="text-base font-bold text-gray-900 tracking-tight">
               Most Viewed Products
             </h3>
-            <p className="text-xs text-gray-500 dark:text-gray-400">Highest customer impression volume in store catalog</p>
+            <p className="text-xs text-gray-500">Highest customer impression volume in store catalog</p>
           </div>
           <button
             onClick={() => onNavigateTab('inventory')}
@@ -602,10 +602,10 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
           {mostViewedProducts.map((prod) => (
             <div
               key={prod.id}
-              className="bg-gray-50/50 rounded-xl border border-gray-100 dark:border-white/10 p-3 hover:shadow-md transition-all group cursor-pointer"
+              className="bg-gray-50/50 rounded-xl border border-gray-100 p-3 hover:shadow-md transition-all group cursor-pointer"
               onClick={() => onNavigateTab('inventory')}
             >
-              <div className="aspect-square w-full rounded-lg overflow-hidden bg-white dark:bg-[#141F38] mb-2.5 border border-gray-200/80">
+              <div className="aspect-square w-full rounded-lg overflow-hidden bg-white mb-2.5 border border-gray-200/80">
                 <img
                   src={prod.image}
                   alt={prod.name}
@@ -615,11 +615,11 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
-              <h4 className="font-bold text-xs text-gray-900 dark:text-gray-100 truncate">{prod.name}</h4>
-              <p className="text-[10px] text-gray-400 dark:text-gray-500 font-medium truncate">{prod.category}</p>
+              <h4 className="font-bold text-xs text-gray-900 truncate">{prod.name}</h4>
+              <p className="text-[10px] text-gray-400 font-medium truncate">{prod.category}</p>
               <div className="mt-2 flex items-center justify-between">
-                <span className="font-bold text-xs text-gray-900 dark:text-gray-100">{formatINR(prod.price)}</span>
-                <span className="text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded">
+                <span className="font-bold text-xs text-gray-900">{formatINR(prod.price)}</span>
+                <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">
                   {prod.views}
                 </span>
               </div>

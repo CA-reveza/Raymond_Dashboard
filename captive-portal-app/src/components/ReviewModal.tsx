@@ -35,7 +35,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
   const submitAndClose = () => {
     setIsSubmitted(true);
     try {
-      sessionStorage.setItem('ss_portal_reviewed', 'true');
+      sessionStorage.setItem('raymonds_portal_reviewed', 'true');
     } catch (e) {}
 
     setTimeout(() => {
@@ -78,7 +78,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
               Thank You for Your Feedback!
             </h3>
             <p className="text-xs text-[#666052] max-w-xs mx-auto">
-              Your review helps us continuously improve in-store wayfinding and shopping at Shoppers Stop.
+              Your review helps us continuously improve in-store wayfinding and shopping at Raymonds.
             </p>
           </div>
         ) : (
@@ -173,7 +173,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
 
             {/* Footer note */}
             <div className="pt-2 border-t border-[#f0ebd9] flex items-center justify-between text-[10px] text-[#888172]">
-              <span>Shoppers Stop Customer Voice</span>
+              <span>Raymonds Customer Voice</span>
               <button onClick={onClose} className="hover:underline text-[#122B52] font-semibold cursor-pointer">
                 Skip & Continue
               </button>

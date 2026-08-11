@@ -54,11 +54,11 @@ export const DownloadReportModal: React.FC<DownloadReportModalProps> = ({
     >
       <div className="space-y-4 text-xs">
         <div>
-          <label className="block font-bold text-slate-700 dark:text-slate-300 mb-1">Select Report Type</label>
+          <label className="block font-bold text-slate-700 mb-1">Select Report Type</label>
           <select
             value={reportType}
             onChange={(e) => setReportType(e.target.value)}
-            className="w-full bg-white dark:bg-[#141F38] p-2.5 rounded-xl border border-slate-300 font-semibold text-slate-900 dark:text-slate-100 outline-none focus:border-[#2D74B2] focus:ring-1 focus:ring-[#2D74B2]"
+            className="w-full bg-white p-2.5 rounded-xl border border-slate-300 font-semibold text-slate-900 outline-none focus:border-[#2D74B2] focus:ring-1 focus:ring-[#2D74B2]"
           >
             <option value="Customer Details, Loyalty Cohorts & VIP Demographics">
               Customer Details & VIP Demographics
@@ -84,7 +84,7 @@ export const DownloadReportModal: React.FC<DownloadReportModalProps> = ({
         </div>
 
         <div>
-          <label className="block font-bold text-slate-700 dark:text-slate-300 mb-1">File Format</label>
+          <label className="block font-bold text-slate-700 mb-1">File Format</label>
           <div className="grid grid-cols-3 gap-2">
             {(['PDF', 'XLSX', 'CSV'] as const).map((fmt) => (
               <button
@@ -93,7 +93,7 @@ export const DownloadReportModal: React.FC<DownloadReportModalProps> = ({
                 className={`py-2 px-3 rounded-xl font-bold border transition-all cursor-pointer ${
                   format === fmt
                     ? 'bg-[#122B52] text-white border-[#122B52]'
-                    : 'bg-white dark:bg-[#141F38] text-slate-700 dark:text-slate-300 border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/5'
+                    : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
                 }`}
               >
                 {fmt}
@@ -102,7 +102,7 @@ export const DownloadReportModal: React.FC<DownloadReportModalProps> = ({
           </div>
         </div>
 
-        <div className="p-3 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl text-slate-600 dark:text-slate-400 font-medium">
+        <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-600 font-medium">
           Note: This export contains sanitized transaction records for {selectedStore} for the current month.
         </div>
       </div>

@@ -146,14 +146,14 @@ export const CustomerFeedbackTab: React.FC = () => {
                   merged.unshift({
                     id: fb.id || `REV-${Math.floor(Math.random() * 90000)}`,
                     customerName: fb.customerName || fb.name || "Store Shopper",
-                    customerEmail: fb.customerEmail || fb.email || "shopper@ss.in",
+                    customerEmail: fb.customerEmail || fb.email || "shopper@raymonds.in",
                     customerPhone: fb.customerPhone || fb.phone || "+91 98201 00000",
                     loyaltyTier: fb.loyaltyTier || "Black",
                     storeLocation: fb.storeLocation || "Mumbai - Malad West Flagship",
                     category: fb.category || "Wi-Fi & Store Kiosk",
                     rating: Number(fb.rating || 5),
                     title: fb.title || "Store Service Feedback",
-                    comment: fb.comment || fb.feedback || "Great shopping experience at Raymond!",
+                    comment: fb.comment || fb.feedback || "Great shopping experience at Raymonds!",
                     date: fb.date || new Date().toISOString().split('T')[0],
                     time: fb.time || new Date().toLocaleTimeString(),
                     sentiment: fb.rating >= 4 ? "Delighted" : "Positive",
@@ -196,7 +196,7 @@ export const CustomerFeedbackTab: React.FC = () => {
       <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 rounded-[18px] p-5 text-white shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="bg-amber-500 text-slate-900 dark:text-slate-100 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+            <span className="bg-amber-500 text-slate-900 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
               Customer Voice & CSAT
             </span>
             <span className="text-xs text-amber-300 font-mono font-bold">
@@ -207,7 +207,7 @@ export const CustomerFeedbackTab: React.FC = () => {
             Customer Feedback & Store Review Analytics
           </h2>
           <p className="text-xs text-gray-300 mt-1 max-w-2xl">
-            Inspect shopper reviews, store service CSAT ratings, and verified buyer testimonials across all Raymond branches.
+            Inspect shopper reviews, store service CSAT ratings, and verified buyer testimonials across all Raymonds branches.
           </p>
         </div>
         <Button
@@ -228,7 +228,7 @@ export const CustomerFeedbackTab: React.FC = () => {
               'Comment': r.comment,
               'Date': `${r.date} ${r.time}`
             }));
-            downloadReportFile('Raymond_CSAT_Reviews_Report', 'CSV', 'All Stores', rows);
+            downloadReportFile('Raymonds_CSAT_Reviews_Report', 'CSV', 'All Stores', rows);
           }}
         >
           Download Feedback Report
@@ -239,52 +239,52 @@ export const CustomerFeedbackTab: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card className="p-4 border-l-4 border-l-amber-500">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Overall Rating</span>
-            <div className="p-2 bg-amber-50 dark:bg-amber-500/10 rounded-lg text-amber-600 dark:text-amber-400">
+            <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Overall Rating</span>
+            <div className="p-2 bg-amber-50 rounded-lg text-amber-600">
               <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
             </div>
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-black text-gray-900 dark:text-gray-100">{avgRating} / 5</span>
-            <span className="text-xs text-amber-600 dark:text-amber-400 font-semibold">({reviews.length} Reviews)</span>
+            <span className="text-2xl font-black text-gray-900">{avgRating} / 5</span>
+            <span className="text-xs text-amber-600 font-semibold">({reviews.length} Reviews)</span>
           </div>
         </Card>
 
         <Card className="p-4 border-l-4 border-l-emerald-500">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">CSAT Score</span>
-            <div className="p-2 bg-emerald-50 dark:bg-emerald-500/10 rounded-lg text-emerald-600 dark:text-emerald-400">
+            <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">CSAT Score</span>
+            <div className="p-2 bg-emerald-50 rounded-lg text-emerald-600">
               <ThumbsUp className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-black text-gray-900 dark:text-gray-100">{csatPercentage}%</span>
-            <span className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold">Positive Sentiment</span>
+            <span className="text-2xl font-black text-gray-900">{csatPercentage}%</span>
+            <span className="text-xs text-emerald-600 font-semibold">Positive Sentiment</span>
           </div>
         </Card>
 
         <Card className="p-4 border-l-4 border-l-rose-500">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Total Feedback Logged</span>
-            <div className="p-2 bg-rose-50 dark:bg-rose-500/10 rounded-lg text-[#2D74B2]">
+            <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Total Feedback Logged</span>
+            <div className="p-2 bg-rose-50 rounded-lg text-[#2D74B2]">
               <MessageSquare className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-black text-gray-900 dark:text-gray-100">{reviews.length}</span>
-            <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">Verified Reviews</span>
+            <span className="text-2xl font-black text-gray-900">{reviews.length}</span>
+            <span className="text-xs text-gray-500 font-medium">Verified Reviews</span>
           </div>
         </Card>
 
         <Card className="p-4 border-l-4 border-l-indigo-500">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Manager Responses</span>
+            <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Manager Responses</span>
             <div className="p-2 bg-indigo-50 rounded-lg text-indigo-600">
               <CheckCircle className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-black text-gray-900 dark:text-gray-100">
+            <span className="text-2xl font-black text-gray-900">
               {reviews.filter(r => r.managerResponse).length}
             </span>
             <span className="text-xs text-indigo-600 font-semibold">Replies Published</span>
@@ -296,13 +296,13 @@ export const CustomerFeedbackTab: React.FC = () => {
       <Card className="p-4">
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
           <div className="relative flex-1">
-            <Search className="w-4 h-4 text-gray-400 dark:text-gray-500 absolute left-3 top-3" />
+            <Search className="w-4 h-4 text-gray-400 absolute left-3 top-3" />
             <input
               type="text"
               placeholder="Search feedback by customer name, department, title, or review text..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg text-xs font-medium text-gray-800 dark:text-gray-200 focus:outline-none focus:border-[#2D74B2]"
+              className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-xs font-medium text-gray-800 focus:outline-none focus:border-[#2D74B2]"
             />
           </div>
 
@@ -310,7 +310,7 @@ export const CustomerFeedbackTab: React.FC = () => {
             <select
               value={selectedStore}
               onChange={(e) => setSelectedStore(e.target.value)}
-              className="px-3 py-2 bg-white dark:bg-[#141F38] border border-gray-200 dark:border-white/10 rounded-lg text-xs font-semibold text-gray-700 dark:text-gray-300 focus:border-[#2D74B2] cursor-pointer"
+              className="px-3 py-2 bg-white border border-gray-200 rounded-lg text-xs font-semibold text-gray-700 focus:border-[#2D74B2] cursor-pointer"
             >
               <option value="All Stores">All Stores</option>
               <option value="Mumbai - Malad West Flagship">Mumbai - Malad West Flagship</option>
@@ -323,7 +323,7 @@ export const CustomerFeedbackTab: React.FC = () => {
             <select
               value={ratingFilter}
               onChange={(e) => setRatingFilter(e.target.value === 'All' ? 'All' : Number(e.target.value))}
-              className="px-3 py-2 bg-white dark:bg-[#141F38] border border-gray-200 dark:border-white/10 rounded-lg text-xs font-semibold text-gray-700 dark:text-gray-300 focus:border-[#2D74B2] cursor-pointer"
+              className="px-3 py-2 bg-white border border-gray-200 rounded-lg text-xs font-semibold text-gray-700 focus:border-[#2D74B2] cursor-pointer"
             >
               <option value="All">All Ratings</option>
               <option value="5">5 Stars (★ ★ ★ ★ ★)</option>
@@ -341,24 +341,24 @@ export const CustomerFeedbackTab: React.FC = () => {
             <div className="flex flex-col md:flex-row md:items-start justify-between gap-3">
               <div className="space-y-1 flex-1">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="font-bold text-slate-900 dark:text-slate-100 text-sm">{r.customerName}</span>
+                  <span className="font-bold text-slate-900 text-sm">{r.customerName}</span>
                   <LoyaltyBadge tier={r.loyaltyTier} />
-                  <span className="bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-400 text-[10px] font-semibold px-2 py-0.5 rounded-full">
+                  <span className="bg-slate-100 text-slate-600 text-[10px] font-semibold px-2 py-0.5 rounded-full">
                     {r.category}
                   </span>
-                  <span className="text-[10px] text-gray-400 dark:text-gray-500 font-mono">
+                  <span className="text-[10px] text-gray-400 font-mono">
                     {r.storeLocation}
                   </span>
                 </div>
 
-                <h4 className="text-sm font-bold text-gray-900 dark:text-gray-100 mt-1 flex items-center gap-2">
+                <h4 className="text-sm font-bold text-gray-900 mt-1 flex items-center gap-2">
                   <span>{r.title}</span>
                   <span className="text-amber-500 font-mono text-xs">
                     {'★'.repeat(r.rating)}
                   </span>
                 </h4>
 
-                <p className="text-xs text-gray-700 dark:text-gray-300 leading-relaxed bg-gray-50/70 p-3 rounded-xl border border-gray-100 dark:border-white/10 mt-2">
+                <p className="text-xs text-gray-700 leading-relaxed bg-gray-50/70 p-3 rounded-xl border border-gray-100 mt-2">
                   "{r.comment}"
                 </p>
 
@@ -367,13 +367,13 @@ export const CustomerFeedbackTab: React.FC = () => {
                     <span className="text-[10px] font-bold text-[#2D74B2] uppercase tracking-wider block">
                       Store Manager Response
                     </span>
-                    <p className="text-xs text-slate-700 dark:text-slate-300 mt-0.5">{r.managerResponse}</p>
+                    <p className="text-xs text-slate-700 mt-0.5">{r.managerResponse}</p>
                   </div>
                 )}
               </div>
 
-              <div className="flex flex-col items-end gap-1 text-[11px] text-gray-400 dark:text-gray-500 font-mono shrink-0">
-                <div className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-semibold bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 rounded-md">
+              <div className="flex flex-col items-end gap-1 text-[11px] text-gray-400 font-mono shrink-0">
+                <div className="flex items-center gap-1 text-emerald-600 font-semibold bg-emerald-50 px-2 py-0.5 rounded-md">
                   <CheckCircle className="w-3 h-3" /> Verified Purchase
                 </div>
                 <span>{r.date} • {r.time}</span>

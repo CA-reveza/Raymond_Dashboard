@@ -22,13 +22,13 @@ export const Badge: React.FC<BadgeProps> = ({
   };
 
   const variantStyles = {
-    default: 'bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300 border border-slate-200/60 dark:border-white/10',
+    default: 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200/60 dark:border-slate-600',
     success: 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-500/20',
     warning: 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-200/60 dark:border-amber-500/20',
     danger: 'bg-rose-50 dark:bg-rose-500/10 text-rose-700 dark:text-rose-400 border border-rose-200/60 dark:border-rose-500/20',
     info: 'bg-sky-50 dark:bg-sky-500/10 text-sky-700 dark:text-sky-400 border border-sky-200/60 dark:border-sky-500/20',
-    neutral: 'bg-slate-50 dark:bg-white/5 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-white/10',
-    brand: 'bg-[#122B52]/10 dark:bg-sky-400/10 text-[#122B52] dark:text-sky-300 border border-[#122B52]/20 dark:border-sky-400/20 font-semibold',
+    neutral: 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-700',
+    brand: 'bg-[#122B52]/10 text-[#122B52] dark:text-sky-300 border border-[#122B52]/20 font-semibold',
   };
 
   return (
@@ -41,11 +41,10 @@ export const Badge: React.FC<BadgeProps> = ({
 export const StatusBadge: React.FC<{ status: OrderStatus | string }> = ({ status }) => {
   switch (status) {
     case 'Delivered':
-    case 'Confirmed':
     case 'In Stock':
     case 'Active':
     case 'Resolved':
-      return <Badge variant="success">{status}</Badge>;
+      return <Badge variant="success">Delivered</Badge>;
     case 'In Transit':
     case 'Processing':
     case 'In Progress':
@@ -53,7 +52,6 @@ export const StatusBadge: React.FC<{ status: OrderStatus | string }> = ({ status
     case 'Low Stock':
     case 'Scheduled':
     case 'Open':
-    case 'Pending':
       return <Badge variant="warning">{status}</Badge>;
     case 'Returned':
     case 'Out of Stock':

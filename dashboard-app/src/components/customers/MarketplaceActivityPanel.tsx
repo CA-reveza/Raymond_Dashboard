@@ -27,11 +27,11 @@ const ICONS: Record<string, React.ReactNode> = {
 function ActivityRow({ row }: { row: Record<string, any> }) {
   const entries = Object.entries(row).filter(([k]) => k !== 'email');
   return (
-    <div className="p-2.5 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/10 text-[11px] grid grid-cols-2 gap-x-3 gap-y-1">
+    <div className="p-2.5 bg-slate-50 rounded-lg border border-slate-200 text-[11px] grid grid-cols-2 gap-x-3 gap-y-1">
       {entries.map(([k, v]) => (
         <div key={k} className="flex justify-between gap-2 truncate">
-          <span className="text-slate-400 dark:text-slate-500 truncate">{k}</span>
-          <span className="text-slate-800 dark:text-slate-200 font-medium truncate">
+          <span className="text-slate-400 truncate">{k}</span>
+          <span className="text-slate-800 font-medium truncate">
             {typeof v === 'object' && v !== null ? JSON.stringify(v) : String(v ?? '—')}
           </span>
         </div>
@@ -56,7 +56,7 @@ export const MarketplaceActivityPanel: React.FC<{ email: string }> = ({ email })
 
   if (loading) {
     return (
-      <div className="flex items-center gap-2 text-xs text-slate-400 dark:text-slate-500 p-4">
+      <div className="flex items-center gap-2 text-xs text-slate-400 p-4">
         <Loader2 className="w-3.5 h-3.5 animate-spin" /> Loading Marketplace activity…
       </div>
     );
@@ -64,7 +64,7 @@ export const MarketplaceActivityPanel: React.FC<{ email: string }> = ({ email })
 
   if (!data || !data.success) {
     return (
-      <div className="flex items-center gap-2 text-xs text-amber-600 dark:text-amber-400 p-3 bg-amber-50 dark:bg-amber-500/10 rounded-lg border border-amber-200 dark:border-amber-500/20">
+      <div className="flex items-center gap-2 text-xs text-amber-600 p-3 bg-amber-50 rounded-lg border border-amber-200">
         <AlertCircle className="w-3.5 h-3.5" /> Couldn't load Marketplace activity.
       </div>
     );
@@ -72,7 +72,7 @@ export const MarketplaceActivityPanel: React.FC<{ email: string }> = ({ email })
 
   if (!data.marketplace_ready) {
     return (
-      <div className="flex items-center gap-2 text-xs text-amber-600 dark:text-amber-400 p-3 bg-amber-50 dark:bg-amber-500/10 rounded-lg border border-amber-200 dark:border-amber-500/20">
+      <div className="flex items-center gap-2 text-xs text-amber-600 p-3 bg-amber-50 rounded-lg border border-amber-200">
         <AlertCircle className="w-3.5 h-3.5" />
         Marketplace connection isn't configured yet (MARKETPLACE_SUPABASE_URL / KEY missing on the server).
       </div>
@@ -84,14 +84,14 @@ export const MarketplaceActivityPanel: React.FC<{ email: string }> = ({ email })
   return (
     <div className="space-y-3">
       {totalRows === 0 && !data.activity.some((s) => s.error) && (
-        <div className="text-xs text-slate-400 dark:text-slate-500 p-3 bg-slate-50 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/10">
+        <div className="text-xs text-slate-400 p-3 bg-slate-50 rounded-lg border border-slate-200">
           No Marketplace bookings, reservations, or orders found for this email yet.
         </div>
       )}
 
       {data.activity.map((source) => (
         <div key={source.key}>
-          <div className="flex items-center gap-1.5 text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase mb-1.5">
+          <div className="flex items-center gap-1.5 text-[11px] font-bold text-slate-700 uppercase mb-1.5">
             {ICONS[source.key]}
             {source.label}
             {source.rows.length > 0 && (
@@ -102,7 +102,7 @@ export const MarketplaceActivityPanel: React.FC<{ email: string }> = ({ email })
           </div>
 
           {source.error && (
-            <div className="text-[11px] text-amber-600 dark:text-amber-400 p-2 bg-amber-50 dark:bg-amber-500/10 rounded-lg border border-amber-200 dark:border-amber-500/20 mb-2">
+            <div className="text-[11px] text-amber-600 p-2 bg-amber-50 rounded-lg border border-amber-200 mb-2">
               Couldn't read this table ({source.error}). Table/column names may need adjusting in
               server/src/routes/marketplace.js.
             </div>

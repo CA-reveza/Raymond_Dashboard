@@ -57,7 +57,7 @@ export const ReportsTab: React.FC = () => {
     setDownloadingId(rep.id);
     setTimeout(() => {
       setDownloadingId(null);
-      downloadReportFile(rep.title, rep.fileFormat, 'Raymond Nationwide');
+      downloadReportFile(rep.title, rep.fileFormat, 'Raymonds Nationwide');
     }, 400);
   };
 
@@ -66,7 +66,7 @@ export const ReportsTab: React.FC = () => {
       case 'Customer Details':
         return <Users className="w-5 h-5 text-blue-600" />;
       case 'Coupon Analytics':
-        return <Tag className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />;
+        return <Tag className="w-5 h-5 text-emerald-600" />;
       case 'Customer Reviews':
         return <Star className="w-5 h-5 text-amber-500" />;
       case 'Returns Audit':
@@ -87,7 +87,7 @@ export const ReportsTab: React.FC = () => {
             <span className="bg-[#2D74B2] text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
               Enterprise Hub
             </span>
-            <span className="text-xs text-gray-400 dark:text-gray-500 font-mono">Real-time Telemetry Exports</span>
+            <span className="text-xs text-gray-400 font-mono">Real-time Telemetry Exports</span>
           </div>
           <h2 className="text-xl font-bold text-white tracking-tight">
             Reports & Operational Intelligence Center
@@ -101,15 +101,15 @@ export const ReportsTab: React.FC = () => {
         <div className="grid grid-cols-3 gap-3 border-t lg:border-t-0 lg:border-l border-gray-700/60 pt-4 lg:pt-0 lg:pl-6">
           <div className="text-center">
             <div className="text-lg font-bold text-white font-mono">{reports.length}</div>
-            <div className="text-[10px] text-gray-400 dark:text-gray-500 uppercase font-medium">Available Reports</div>
+            <div className="text-[10px] text-gray-400 uppercase font-medium">Available Reports</div>
           </div>
           <div className="text-center">
             <div className="text-lg font-bold text-emerald-400 font-mono">100%</div>
-            <div className="text-[10px] text-gray-400 dark:text-gray-500 uppercase font-medium">Audit Certified</div>
+            <div className="text-[10px] text-gray-400 uppercase font-medium">Audit Certified</div>
           </div>
           <div className="text-center">
             <div className="text-lg font-bold text-amber-400 font-mono">Auto</div>
-            <div className="text-[10px] text-gray-400 dark:text-gray-500 uppercase font-medium">Sync Schedule</div>
+            <div className="text-[10px] text-gray-400 uppercase font-medium">Sync Schedule</div>
           </div>
         </div>
       </div>
@@ -128,7 +128,7 @@ export const ReportsTab: React.FC = () => {
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                     active
                       ? 'bg-[#2D74B2] text-white shadow-2xs'
-                      : 'bg-gray-100/80 text-gray-600 dark:text-gray-400 hover:bg-gray-200/80 hover:text-gray-900 dark:hover:text-gray-100'
+                      : 'bg-gray-100/80 text-gray-600 hover:bg-gray-200/80 hover:text-gray-900'
                   }`}
                 >
                   {cat}
@@ -140,20 +140,20 @@ export const ReportsTab: React.FC = () => {
           {/* Search & Format Filter */}
           <div className="flex items-center gap-2.5">
             <div className="relative flex-1 md:w-64">
-              <Search className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500 absolute left-3 top-3" />
+              <Search className="w-3.5 h-3.5 text-gray-400 absolute left-3 top-3" />
               <input
                 type="text"
                 placeholder="Search reports by keyword..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg pl-8 pr-3 py-1.5 text-xs text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:border-[#2D74B2] focus:ring-1 focus:ring-[#2D74B2]"
+                className="w-full bg-gray-50 border border-gray-200 rounded-lg pl-8 pr-3 py-1.5 text-xs text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#2D74B2] focus:ring-1 focus:ring-[#2D74B2]"
               />
             </div>
 
             <select
               value={selectedFormat}
               onChange={(e) => setSelectedFormat(e.target.value)}
-              className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-xs font-semibold text-gray-700 dark:text-gray-300 py-1.5 px-2.5 rounded-lg focus:outline-none cursor-pointer"
+              className="bg-gray-50 border border-gray-200 text-xs font-semibold text-gray-700 py-1.5 px-2.5 rounded-lg focus:outline-none cursor-pointer"
             >
               <option value="All">All Formats</option>
               <option value="PDF">PDF</option>
@@ -170,40 +170,40 @@ export const ReportsTab: React.FC = () => {
           <Card key={rep.id} className="flex flex-col justify-between hover:shadow-md transition-all">
             <div>
               <div className="flex items-start justify-between gap-3 mb-3">
-                <div className="p-2.5 bg-gray-100 dark:bg-white/10 rounded-xl shrink-0">
+                <div className="p-2.5 bg-gray-100 rounded-xl shrink-0">
                   {getCategoryIcon(rep.category)}
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="bg-rose-50 dark:bg-rose-500/10 text-[#2D74B2] text-[10px] font-bold px-2 py-0.5 rounded-md">
+                  <span className="bg-rose-50 text-[#2D74B2] text-[10px] font-bold px-2 py-0.5 rounded-md">
                     {rep.category}
                   </span>
-                  <span className="bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-400 text-[10px] font-bold px-2 py-0.5 rounded-md font-mono">
+                  <span className="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-md font-mono">
                     {rep.fileFormat} • {rep.fileSize}
                   </span>
                 </div>
               </div>
 
-              <h3 className="font-bold text-sm text-gray-900 dark:text-gray-100 leading-snug">{rep.title}</h3>
+              <h3 className="font-bold text-sm text-gray-900 leading-snug">{rep.title}</h3>
               {rep.description && (
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1.5 leading-relaxed">{rep.description}</p>
+                <p className="text-xs text-gray-500 mt-1.5 leading-relaxed">{rep.description}</p>
               )}
 
-              <div className="mt-3 flex items-center justify-between text-[11px] text-gray-400 dark:text-gray-500 font-mono">
+              <div className="mt-3 flex items-center justify-between text-[11px] text-gray-400 font-mono">
                 <span className="flex items-center gap-1">
-                  <Clock className="w-3 h-3 text-gray-400 dark:text-gray-500" /> {rep.generatedDate}
+                  <Clock className="w-3 h-3 text-gray-400" /> {rep.generatedDate}
                 </span>
                 {rep.recordCount && (
-                  <span className="font-semibold text-gray-600 dark:text-gray-400">
+                  <span className="font-semibold text-gray-600">
                     {rep.recordCount.toLocaleString()} Records
                   </span>
                 )}
               </div>
             </div>
 
-            <div className="pt-4 border-t border-gray-100 dark:border-white/10 flex items-center justify-between text-xs mt-4">
+            <div className="pt-4 border-t border-gray-100 flex items-center justify-between text-xs mt-4">
               <button
                 onClick={() => setPreviewReport(rep)}
-                className="flex items-center gap-1.5 text-xs font-semibold text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 cursor-pointer"
+                className="flex items-center gap-1.5 text-xs font-semibold text-gray-600 hover:text-gray-900 cursor-pointer"
               >
                 <Eye className="w-3.5 h-3.5 text-blue-600" />
                 <span>Preview Data</span>
@@ -224,10 +224,10 @@ export const ReportsTab: React.FC = () => {
       </div>
 
       {filteredReports.length === 0 && (
-        <div className="text-center py-12 bg-white dark:bg-[#141F38] rounded-2xl border border-gray-200 dark:border-white/10 p-8">
+        <div className="text-center py-12 bg-white rounded-2xl border border-gray-200 p-8">
           <FileText className="w-10 h-10 text-gray-300 mx-auto mb-2" />
-          <p className="text-sm font-bold text-gray-700 dark:text-gray-300">No matching reports found</p>
-          <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Try adjusting your category filter or search query</p>
+          <p className="text-sm font-bold text-gray-700">No matching reports found</p>
+          <p className="text-xs text-gray-400 mt-1">Try adjusting your category filter or search query</p>
         </div>
       )}
 
@@ -241,7 +241,7 @@ export const ReportsTab: React.FC = () => {
           maxWidth="lg"
           footer={
             <div className="flex items-center justify-between w-full">
-              <span className="text-xs text-gray-400 dark:text-gray-500 font-mono">
+              <span className="text-xs text-gray-400 font-mono">
                 {previewReport.fileFormat} • {previewReport.fileSize} • {previewReport.recordCount?.toLocaleString()} items
               </span>
               <div className="flex items-center gap-2">
@@ -264,12 +264,12 @@ export const ReportsTab: React.FC = () => {
           }
         >
           <div className="space-y-4 text-xs">
-            <div className="p-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl flex items-center justify-between">
+            <div className="p-3 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-between">
               <div>
-                <p className="font-bold text-gray-800 dark:text-gray-200">{previewReport.title}</p>
-                <p className="text-gray-500 dark:text-gray-400 text-[11px] mt-0.5">{previewReport.description}</p>
+                <p className="font-bold text-gray-800">{previewReport.title}</p>
+                <p className="text-gray-500 text-[11px] mt-0.5">{previewReport.description}</p>
               </div>
-              <span className="bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-bold px-2.5 py-1 rounded-lg shrink-0">
+              <span className="bg-emerald-50 text-emerald-700 font-bold px-2.5 py-1 rounded-lg shrink-0">
                 Audit Verified
               </span>
             </div>
@@ -287,15 +287,15 @@ export const ReportsTab: React.FC = () => {
                     <div className="text-lg font-bold text-purple-900 mt-0.5">5,540 (68.4%)</div>
                   </div>
                   <div className="p-2.5 bg-emerald-50/60 rounded-xl border border-emerald-100">
-                    <div className="text-[10px] text-emerald-700 dark:text-emerald-400 font-bold">Average Customer LTV</div>
+                    <div className="text-[10px] text-emerald-700 font-bold">Average Customer LTV</div>
                     <div className="text-lg font-bold text-emerald-900 mt-0.5">₹34,800</div>
                   </div>
                 </div>
 
-                <div className="font-bold text-gray-800 dark:text-gray-200 pt-2">Sample Member Roster Preview</div>
-                <div className="border border-gray-200 dark:border-white/10 rounded-xl overflow-hidden">
+                <div className="font-bold text-gray-800 pt-2">Sample Member Roster Preview</div>
+                <div className="border border-gray-200 rounded-xl overflow-hidden">
                   <table className="w-full text-left">
-                    <thead className="bg-gray-50 dark:bg-white/5 text-gray-500 dark:text-gray-400 font-bold uppercase text-[10px]">
+                    <thead className="bg-gray-50 text-gray-500 font-bold uppercase text-[10px]">
                       <tr>
                         <th className="p-2">Name</th>
                         <th className="p-2">Email</th>
@@ -303,17 +303,17 @@ export const ReportsTab: React.FC = () => {
                         <th className="p-2">Total Spent</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-100 dark:divide-white/10 text-gray-700 dark:text-gray-300">
+                    <tbody className="divide-y divide-gray-100 text-gray-700">
                       <tr>
                         <td className="p-2 font-bold">Ananya Deshmukh</td>
                         <td className="p-2 font-mono text-[11px]">ananya.d@gmail.com</td>
-                        <td className="p-2 text-rose-600 dark:text-rose-400 font-bold">Black</td>
+                        <td className="p-2 text-rose-600 font-bold">Black</td>
                         <td className="p-2 font-bold">₹2,84,900</td>
                       </tr>
                       <tr>
                         <td className="p-2 font-bold">Kavita Reddy</td>
                         <td className="p-2 font-mono text-[11px]">kavita.reddy@gmail.com</td>
-                        <td className="p-2 text-rose-600 dark:text-rose-400 font-bold">Black</td>
+                        <td className="p-2 text-rose-600 font-bold">Black</td>
                         <td className="p-2 font-bold">₹3,92,000</td>
                       </tr>
                       <tr>
@@ -332,11 +332,11 @@ export const ReportsTab: React.FC = () => {
               <div className="space-y-3">
                 <div className="grid grid-cols-3 gap-3">
                   <div className="p-2.5 bg-emerald-50/60 rounded-xl border border-emerald-100">
-                    <div className="text-[10px] text-emerald-700 dark:text-emerald-400 font-bold">Total Redemptions</div>
+                    <div className="text-[10px] text-emerald-700 font-bold">Total Redemptions</div>
                     <div className="text-lg font-bold text-emerald-900 mt-0.5">1,450</div>
                   </div>
                   <div className="p-2.5 bg-amber-50/60 rounded-xl border border-amber-100">
-                    <div className="text-[10px] text-amber-700 dark:text-amber-400 font-bold">Discount Spend Given</div>
+                    <div className="text-[10px] text-amber-700 font-bold">Discount Spend Given</div>
                     <div className="text-lg font-bold text-amber-900 mt-0.5">₹14,50,000</div>
                   </div>
                   <div className="p-2.5 bg-indigo-50/60 rounded-xl border border-indigo-100">
@@ -345,10 +345,10 @@ export const ReportsTab: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="font-bold text-gray-800 dark:text-gray-200 pt-2">Active Voucher Performance List</div>
-                <div className="border border-gray-200 dark:border-white/10 rounded-xl overflow-hidden">
+                <div className="font-bold text-gray-800 pt-2">Active Voucher Performance List</div>
+                <div className="border border-gray-200 rounded-xl overflow-hidden">
                   <table className="w-full text-left">
-                    <thead className="bg-gray-50 dark:bg-white/5 text-gray-500 dark:text-gray-400 font-bold uppercase text-[10px]">
+                    <thead className="bg-gray-50 text-gray-500 font-bold uppercase text-[10px]">
                       <tr>
                         <th className="p-2">Code</th>
                         <th className="p-2">Category</th>
@@ -356,24 +356,24 @@ export const ReportsTab: React.FC = () => {
                         <th className="p-2">Status</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-100 dark:divide-white/10 text-gray-700 dark:text-gray-300">
+                    <tbody className="divide-y divide-gray-100 text-gray-700">
                       <tr>
-                        <td className="p-2 font-mono font-bold text-rose-600 dark:text-rose-400">FIRSTCITIZEN20</td>
+                        <td className="p-2 font-mono font-bold text-rose-600">FIRSTCITIZEN20</td>
                         <td className="p-2">All Products</td>
                         <td className="p-2 font-bold">540 / 1000</td>
-                        <td className="p-2 text-emerald-600 dark:text-emerald-400 font-bold">Active</td>
+                        <td className="p-2 text-emerald-600 font-bold">Active</td>
                       </tr>
                       <tr>
-                        <td className="p-2 font-mono font-bold text-rose-600 dark:text-rose-400">LUXURYWATCH15</td>
+                        <td className="p-2 font-mono font-bold text-rose-600">LUXURYWATCH15</td>
                         <td className="p-2">Luxury Watches</td>
                         <td className="p-2 font-bold">320 / 500</td>
-                        <td className="p-2 text-emerald-600 dark:text-emerald-400 font-bold">Active</td>
+                        <td className="p-2 text-emerald-600 font-bold">Active</td>
                       </tr>
                       <tr>
-                        <td className="p-2 font-mono font-bold text-rose-600 dark:text-rose-400">BEAUTYBUY2</td>
+                        <td className="p-2 font-mono font-bold text-rose-600">BEAUTYBUY2</td>
                         <td className="p-2">Beauty & Perfumes</td>
                         <td className="p-2 font-bold">890 / 2500</td>
-                        <td className="p-2 text-emerald-600 dark:text-emerald-400 font-bold">Active</td>
+                        <td className="p-2 text-emerald-600 font-bold">Active</td>
                       </tr>
                     </tbody>
                   </table>
@@ -385,13 +385,13 @@ export const ReportsTab: React.FC = () => {
               <div className="space-y-3">
                 <div className="grid grid-cols-3 gap-3">
                   <div className="p-2.5 bg-amber-50/60 rounded-xl border border-amber-100">
-                    <div className="text-[10px] text-amber-700 dark:text-amber-400 font-bold">Average Store Rating</div>
+                    <div className="text-[10px] text-amber-700 font-bold">Average Store Rating</div>
                     <div className="text-lg font-bold text-amber-900 mt-0.5 flex items-center gap-1">
                       4.8 / 5.0 <Star className="w-4 h-4 fill-amber-400 text-amber-400 inline" />
                     </div>
                   </div>
                   <div className="p-2.5 bg-emerald-50/60 rounded-xl border border-emerald-100">
-                    <div className="text-[10px] text-emerald-700 dark:text-emerald-400 font-bold">Positive Sentiment</div>
+                    <div className="text-[10px] text-emerald-700 font-bold">Positive Sentiment</div>
                     <div className="text-lg font-bold text-emerald-900 mt-0.5">92.4%</div>
                   </div>
                   <div className="p-2.5 bg-blue-50/60 rounded-xl border border-blue-100">
@@ -400,27 +400,27 @@ export const ReportsTab: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="font-bold text-gray-800 dark:text-gray-200 pt-2">Recent Customer Review Audits</div>
+                <div className="font-bold text-gray-800 pt-2">Recent Customer Review Audits</div>
                 <div className="space-y-2">
-                  <div className="p-2.5 bg-gray-50 dark:bg-white/5 rounded-xl border border-gray-200 dark:border-white/10">
+                  <div className="p-2.5 bg-gray-50 rounded-xl border border-gray-200">
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-gray-900 dark:text-gray-100">Estée Lauder Night Repair</span>
+                      <span className="font-bold text-gray-900">Estée Lauder Night Repair</span>
                       <span className="text-amber-500 font-bold flex items-center gap-0.5">
                         5.0 ★
                       </span>
                     </div>
-                    <p className="text-[11px] text-gray-600 dark:text-gray-400 mt-1">
+                    <p className="text-[11px] text-gray-600 mt-1">
                       "Authentic product delivered within 2 hours in Malad flagship pickup. Loved the packaging!"
                     </p>
                   </div>
-                  <div className="p-2.5 bg-gray-50 dark:bg-white/5 rounded-xl border border-gray-200 dark:border-white/10">
+                  <div className="p-2.5 bg-gray-50 rounded-xl border border-gray-200">
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-gray-900 dark:text-gray-100">Tommy Hilfiger Navy Blazer</span>
+                      <span className="font-bold text-gray-900">Tommy Hilfiger Navy Blazer</span>
                       <span className="text-amber-500 font-bold flex items-center gap-0.5">
                         4.5 ★
                       </span>
                     </div>
-                    <p className="text-[11px] text-gray-600 dark:text-gray-400 mt-1">
+                    <p className="text-[11px] text-gray-600 mt-1">
                       "Great fitting and premium fabric texture. Fitting session at store counter was quick."
                     </p>
                   </div>
@@ -431,10 +431,10 @@ export const ReportsTab: React.FC = () => {
             {previewReport.category !== 'Customer Details' &&
               previewReport.category !== 'Coupon Analytics' &&
               previewReport.category !== 'Customer Reviews' && (
-                <div className="p-4 bg-gray-50 dark:bg-white/5 rounded-xl border border-gray-200 dark:border-white/10 text-center">
-                  <BarChart3 className="w-8 h-8 text-gray-400 dark:text-gray-500 mx-auto mb-2" />
-                  <p className="font-bold text-gray-700 dark:text-gray-300">Full Certified Audit Ledger Ready</p>
-                  <p className="text-gray-500 dark:text-gray-400 text-[11px] mt-1">
+                <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 text-center">
+                  <BarChart3 className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                  <p className="font-bold text-gray-700">Full Certified Audit Ledger Ready</p>
+                  <p className="text-gray-500 text-[11px] mt-1">
                     Download the complete {previewReport.fileFormat} file to inspect all {previewReport.recordCount?.toLocaleString()} itemized entries.
                   </p>
                 </div>

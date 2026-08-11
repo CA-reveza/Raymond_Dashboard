@@ -68,7 +68,7 @@ export const ScratchCard: React.FC<ScratchCardProps> = ({ customer, onExplore, o
     // 2. Post to Telemetry & Customer Sync API (Port 63265)
     const custName = customer.fullName || customer.name || customer.username || 'Wi-Fi Guest';
     const custPhone = customer.phone || '9876543210';
-    const custEmail = customer.email || `${custPhone}@ss-wifi.in`;
+    const custEmail = customer.email || `${custPhone}@raymonds-wifi.in`;
 
     // Save customer + assigned_coupon in Supabase customers table
     fetch(apiUrl('/api/customers'), {
@@ -103,7 +103,7 @@ export const ScratchCard: React.FC<ScratchCardProps> = ({ customer, onExplore, o
         discountLabel: coupon.discount,
         customerName: customer.fullName || 'Wi-Fi Guest',
         customerPhone: customer.phone || '9876543210',
-        customerEmail: customer.email || `${customer.phone || '9876543210'}@ss-wifi.in`,
+        customerEmail: customer.email || `${customer.phone || '9876543210'}@raymonds-wifi.in`,
         connectedAt: customer.connectedAt || new Date().toLocaleTimeString(),
         redeemedAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       },
@@ -111,11 +111,11 @@ export const ScratchCard: React.FC<ScratchCardProps> = ({ customer, onExplore, o
     };
 
     try {
-      localStorage.setItem('ss_wifi_telemetry_event', JSON.stringify(payload));
+      localStorage.setItem('raymonds_wifi_telemetry_event', JSON.stringify(payload));
     } catch (e) {}
 
     try {
-      const channel = new BroadcastChannel('ss_wifi_channel');
+      const channel = new BroadcastChannel('raymonds_wifi_channel');
       channel.postMessage(payload);
     } catch (e) {}
   }, [customer, onUpdateCustomerVoucher]);
@@ -286,7 +286,7 @@ export const ScratchCard: React.FC<ScratchCardProps> = ({ customer, onExplore, o
               <div className="absolute -left-6 -top-6 w-20 h-20 rounded-full bg-[#122B52]/5 pointer-events-none" />
 
               <span className="text-[10px] font-bold uppercase tracking-widest text-[#122B52] mb-1">
-                SHOPPERS STOP DASHBOARD COUPON
+                RAYMONDS DASHBOARD COUPON
               </span>
 
               <div className="text-3xl sm:text-4xl font-serif font-black text-[#1a1a1a] tracking-tight text-shadow-sm my-0.5">

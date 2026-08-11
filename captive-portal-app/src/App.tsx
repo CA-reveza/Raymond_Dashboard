@@ -22,10 +22,10 @@ export default function App() {
   const broadcastTelemetry = (type: string, payload: any) => {
     const eventData = { type, payload, timestamp: Date.now() };
     try {
-      localStorage.setItem('ss_wifi_telemetry_event', JSON.stringify(eventData));
+      localStorage.setItem('raymonds_wifi_telemetry_event', JSON.stringify(eventData));
     } catch (e) {}
     try {
-      const channel = new BroadcastChannel('ss_wifi_channel');
+      const channel = new BroadcastChannel('raymonds_wifi_channel');
       channel.postMessage(eventData);
     } catch (e) {}
   };
@@ -33,8 +33,8 @@ export default function App() {
   // 1. New Guest Success -> advances to Scratch Card
   const handleGuestLoginSuccess = (customerData: CustomerInfo) => {
     try {
-      sessionStorage.removeItem('ss_portal_reviewed');
-      sessionStorage.removeItem('ss_portal_pulse_checked');
+      sessionStorage.removeItem('raymonds_portal_reviewed');
+      sessionStorage.removeItem('raymonds_portal_pulse_checked');
     } catch (e) {}
 
     setCustomer(customerData);
@@ -53,8 +53,8 @@ export default function App() {
   // 2. Returning Member Success -> advances DIRECTLY to In-Store Companion (No re-scratching!)
   const handleReturningUserLoginSuccess = (customerData: CustomerInfo) => {
     try {
-      sessionStorage.removeItem('ss_portal_reviewed');
-      sessionStorage.removeItem('ss_portal_pulse_checked');
+      sessionStorage.removeItem('raymonds_portal_reviewed');
+      sessionStorage.removeItem('raymonds_portal_pulse_checked');
     } catch (e) {}
 
     setCustomer(customerData);
@@ -82,8 +82,8 @@ export default function App() {
 
   const handleLogout = () => {
     try {
-      sessionStorage.removeItem('ss_portal_reviewed');
-      sessionStorage.removeItem('ss_portal_pulse_checked');
+      sessionStorage.removeItem('raymonds_portal_reviewed');
+      sessionStorage.removeItem('raymonds_portal_pulse_checked');
     } catch (e) {}
     setCurrentScreen('login');
   };

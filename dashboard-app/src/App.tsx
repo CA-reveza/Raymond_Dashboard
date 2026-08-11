@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { TabType, Order, OrderStatus, Customer, InventoryItem, Coupon, ReturnRecord, CouponRedemption, LoyaltyTier, PaymentMethod } from './types';
+import { TabType, Order, OrderStatus, Customer, InventoryItem, Coupon, ReturnRecord, CouponRedemption } from './types';
 import { apiUrl } from './config/api';
 import {
   INITIAL_ORDERS,
@@ -21,6 +21,7 @@ import { playNewCustomerChime } from './utils/notificationSound';
 import { OverviewTab } from './components/dashboard/OverviewTab';
 import { OrdersTab } from './components/orders/OrdersTab';
 import { CustomersTab } from './components/customers/CustomersTab';
+import { ConnectorsTab } from './components/connectors/ConnectorsTab';
 import { InventoryTab } from './components/inventory/InventoryTab';
 import { ReturnProductTab } from './components/returns/ReturnProductTab';
 import { CouponsTab } from './components/coupons/CouponsTab';
@@ -58,7 +59,7 @@ export default function App() {
     {
       id: 'seed-3',
       title: 'High-Value Order Received',
-      desc: 'Order #RR-ORD-98421 placed for ₹1,85,000 by Black Member.',
+      desc: 'Order #RAY-ORD-98421 placed for ₹1,85,000 by Black Member.',
       time: '35 mins ago',
       unread: true,
     },
@@ -106,7 +107,7 @@ export default function App() {
               const rawPoints = c.loyaltyPoints ?? c.points;
               const checkedInAt = c.last_visit || c.created_at || new Date().toISOString();
               return {
-                id: c.id || c.user_id || c.customer_id || `FC-${Math.floor(Math.random() * 90000)}`,
+                id: c.id || c.user_id || c.customer_id || `FC-${(c.email || c.phone || c.name || 'unknown').toLowerCase().replace(/\W+/g, '')}`,
                 name: c.name || c.username || "First Citizen Member",
                 email: c.email || "",
                 phone: c.phone || c.phone_number || "",
@@ -128,14 +129,24 @@ export default function App() {
             // a popup + notification-bell entry for each one.
             const currentIds = new Set(apiCusts.map((c) => c.id));
             const isFirstFetch = knownCustomerIdsRef.current === null;
+            console.log(
+              `[AXIONIK] poll @ ${new Date().toLocaleTimeString()} — ${apiCusts.length} customers from API`,
+              isFirstFetch ? '(first fetch, populating baseline, no popups)' : ''
+            );
             if (!isFirstFetch) {
               const newlyArrived = apiCusts.filter((c) => !knownCustomerIdsRef.current!.has(c.id));
               if (newlyArrived.length) {
+                console.log(
+                  '[AXIONIK] new arrival(s) detected:',
+                  newlyArrived.map((c) => ({ id: c.id, name: c.name }))
+                );
                 setCustomerToasts((prev) => [
                   ...newlyArrived.map((c) => ({ id: c.id, name: c.name, storeLocation: c.storeLocation })),
                   ...prev,
                 ]);
                 playNewCustomerChime();
+              } else {
+                console.log('[AXIONIK] no new arrivals this poll');
               }
             }
             knownCustomerIdsRef.current = currentIds;
@@ -167,7 +178,9 @@ export default function App() {
             });
           }
         }
-      } catch (e) {}
+      } catch (e) {
+        console.warn('[AXIONIK] customer poll failed — will retry next cycle:', e);
+      }
 
       try {
         const resR = await fetch(apiUrl("/api/redemptions"));
@@ -193,7 +206,7 @@ export default function App() {
                     customerEmail: r.customerEmail || r.email || "",
                     customerPhone: r.customerPhone || r.phone || "",
                     loyaltyTier: r.loyaltyTier || "Black First Citizen",
-                    orderId: r.orderId || `RR-ORD-${Math.floor(90000 + Math.random() * 9999)}`,
+                    orderId: r.orderId || `RAY-ORD-${Math.floor(90000 + Math.random() * 9999)}`,
                     orderTotal: Number(r.orderTotal || cpn.minOrderValue + 500),
                     discountSaved: Number(r.discountSaved || cpn.discountValue),
                     redeemedAt: r.redeemedAt || "Today",
@@ -244,7 +257,7 @@ export default function App() {
                   customerEmail: r.customerEmail || '',
                   customerPhone: r.customerPhone || '',
                   loyaltyTier: r.loyaltyTier || 'Gold',
-                  orderId: r.orderId || `RR-ORD-${Math.floor(90000 + Math.random() * 9999)}`,
+                  orderId: r.orderId || `RAY-ORD-${Math.floor(90000 + Math.random() * 9999)}`,
                   orderTotal: Number(r.orderTotal || 0),
                   discountSaved: Number(r.discountSaved || 0),
                   redeemedAt: r.redeemedAt || 'Today',
@@ -281,48 +294,6 @@ export default function App() {
                 }
               });
               return merged;
-            });
-          }
-        }
-      } catch (e) {}
-
-      try {
-        const resO = await fetch(apiUrl("/api/marketplace/orders"));
-        if (resO.ok) {
-          const dataO = await resO.json();
-          if (dataO && dataO.success && Array.isArray(dataO.orders) && isMounted) {
-            const connectorOrders: Order[] = dataO.orders.map((o: any) => {
-              const created = o.created_at ? new Date(o.created_at) : new Date();
-              return {
-                id: o.id,
-                customerName: o.customer_name || 'Connector Customer',
-                customerEmail: o.customer_email || '',
-                customerPhone: o.customer_phone || '',
-                loyaltyTier: 'Silver' as LoyaltyTier,
-                storeLocation: o.store || 'Online Store (eCom Direct)',
-                date: created.toLocaleDateString('en-GB').split('/').join('.'),
-                time: created.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
-                items: [{
-                  id: `${o.id}-items`,
-                  name: o.items || 'Retail item(s)',
-                  sku: o.id,
-                  category: 'Menswear',
-                  quantity: 1,
-                  unitPrice: Number(o.amount) || 0,
-                  image: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&q=80&w=200',
-                }],
-                totalAmount: Number(o.amount) || 0,
-                paymentMethod: 'Razorpay' as PaymentMethod,
-                status: (o.status === 'confirmed' ? 'Confirmed' : o.status === 'pending' ? 'Pending' : 'Processing') as OrderStatus,
-                shippingAddress: '-',
-                trackingNumber: o.payment_ref !== '-' ? o.payment_ref : undefined,
-                channel: o.channel_label || undefined,
-              };
-            });
-
-            setOrders((prev) => {
-              const nonConnector = prev.filter((p) => !connectorOrders.some((co) => co.id === p.id));
-              return [...connectorOrders, ...nonConnector];
             });
           }
         }
@@ -492,6 +463,8 @@ export default function App() {
         return 'Return Product Module';
       case 'coupons':
         return 'Promotions & Coupons';
+      case 'connectors':
+        return 'Connectors — Marketplace Activity';
       case 'analytics':
         return 'Analytics & Intelligence';
       case 'reports':
@@ -506,7 +479,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F9FAFB] dark:bg-[#0B1220] text-gray-900 dark:text-gray-100 font-sans selection:bg-[#2D74B2]/20 selection:text-[#2D74B2] transition-colors duration-200">
+    <div className="min-h-screen bg-[#F9FAFB] dark:bg-slate-950 text-gray-900 dark:text-slate-100 font-sans selection:bg-[#2D74B2]/20 selection:text-[#2D74B2]">
       <NewCustomerToastContainer toasts={customerToasts} onDismiss={dismissToast} />
       <Sidebar
         activeTab={activeTab}
@@ -593,6 +566,8 @@ export default function App() {
           {activeTab === 'coupons' && (
             <CouponsTab coupons={coupons} onCreateCoupon={handleCreateCoupon} />
           )}
+
+          {activeTab === 'connectors' && <ConnectorsTab />}
 
           {activeTab === 'feedback' && <CustomerFeedbackTab />}
 

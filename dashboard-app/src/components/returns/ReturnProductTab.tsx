@@ -186,7 +186,7 @@ export const ReturnProductTab: React.FC<ReturnProductTabProps> = ({
             <span className="bg-[#2D74B2] text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
               Returns & Refunds
             </span>
-            <span className="text-xs text-gray-400 dark:text-gray-500 font-mono">Real-time Financial Sync</span>
+            <span className="text-xs text-gray-400 font-mono">Real-time Financial Sync</span>
           </div>
           <h2 className="text-xl font-bold text-white tracking-tight">
             Return Product & Refund Management Module
@@ -209,11 +209,11 @@ export const ReturnProductTab: React.FC<ReturnProductTabProps> = ({
 
       {/* Success Notification Banner */}
       {successMessage && (
-        <div className="p-4 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 rounded-xl text-emerald-900 flex items-start gap-3 shadow-sm animate-in slide-in-from-top duration-300">
-          <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+        <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 flex items-start gap-3 shadow-sm animate-in slide-in-from-top duration-300">
+          <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
           <div className="text-xs">
             <p className="font-bold text-emerald-900">Return Process Completed Successfully</p>
-            <p className="mt-0.5 text-emerald-700 dark:text-emerald-400">{successMessage}</p>
+            <p className="mt-0.5 text-emerald-700">{successMessage}</p>
           </div>
         </div>
       )}
@@ -223,12 +223,12 @@ export const ReturnProductTab: React.FC<ReturnProductTabProps> = ({
         {/* Return Process Form Card (5 cols) */}
         <Card className="lg:col-span-5 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between border-b border-gray-100 dark:border-white/10 pb-3 mb-4">
+            <div className="flex items-center justify-between border-b border-gray-100 pb-3 mb-4">
               <div className="flex items-center gap-2">
                 <RotateCcw className="w-5 h-5 text-[#2D74B2]" />
-                <h3 className="font-bold text-base text-gray-900 dark:text-gray-100">Process New Return</h3>
+                <h3 className="font-bold text-base text-gray-900">Process New Return</h3>
               </div>
-              <span className="text-[10px] bg-rose-50 dark:bg-rose-500/10 text-[#2D74B2] font-bold px-2 py-0.5 rounded">
+              <span className="text-[10px] bg-rose-50 text-[#2D74B2] font-bold px-2 py-0.5 rounded">
                 Live POS
               </span>
             </div>
@@ -236,14 +236,14 @@ export const ReturnProductTab: React.FC<ReturnProductTabProps> = ({
             <form onSubmit={handleSubmit} className="space-y-4 text-xs">
               {/* Order ID Selection */}
               <div>
-                <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-1">
-                  Order ID <span className="text-gray-400 dark:text-gray-500 font-normal">(Select existing or enter new)</span>
+                <label className="block text-gray-700 font-semibold mb-1">
+                  Order ID <span className="text-gray-400 font-normal">(Select existing or enter new)</span>
                 </label>
                 <div className="flex gap-2">
                   <select
                     value={selectedOrderId}
                     onChange={handleOrderChange}
-                    className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg p-2.5 font-medium text-gray-800 dark:text-gray-200 focus:outline-none focus:border-[#2D74B2] focus:ring-1 focus:ring-[#2D74B2]"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg p-2.5 font-medium text-gray-800 focus:outline-none focus:border-[#2D74B2] focus:ring-1 focus:ring-[#2D74B2]"
                   >
                     <option value="">-- Choose Recent Order --</option>
                     {safeOrders.map((ord) => (
@@ -257,7 +257,7 @@ export const ReturnProductTab: React.FC<ReturnProductTabProps> = ({
 
               {/* Customer Name */}
               <div>
-                <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-1">
+                <label className="block text-gray-700 font-semibold mb-1">
                   Customer Name <span className="text-rose-500">*</span>
                 </label>
                 <input
@@ -266,19 +266,19 @@ export const ReturnProductTab: React.FC<ReturnProductTabProps> = ({
                   placeholder="e.g. Ananya Deshmukh"
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
-                  className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg p-2.5 font-medium text-gray-900 dark:text-gray-100 focus:outline-none focus:border-[#2D74B2] focus:ring-1 focus:ring-[#2D74B2]"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-lg p-2.5 font-medium text-gray-900 focus:outline-none focus:border-[#2D74B2] focus:ring-1 focus:ring-[#2D74B2]"
                 />
               </div>
 
               {/* Product Name */}
               <div>
-                <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-1">
+                <label className="block text-gray-700 font-semibold mb-1">
                   Product Name <span className="text-rose-500">*</span>
                 </label>
                 <select
                   value={productName}
                   onChange={handleProductChange}
-                  className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg p-2.5 font-medium text-gray-900 dark:text-gray-100 focus:outline-none focus:border-[#2D74B2] focus:ring-1 focus:ring-[#2D74B2]"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-lg p-2.5 font-medium text-gray-900 focus:outline-none focus:border-[#2D74B2] focus:ring-1 focus:ring-[#2D74B2]"
                 >
                   <option value="">-- Select Product From Catalog --</option>
                   {safeInventory.map((item) => (
@@ -292,25 +292,25 @@ export const ReturnProductTab: React.FC<ReturnProductTabProps> = ({
                   placeholder="Or enter custom product name manually..."
                   value={productName}
                   onChange={(e) => setProductName(e.target.value)}
-                  className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg p-2 mt-1 font-medium text-gray-800 dark:text-gray-200 text-[11px] focus:outline-none focus:border-[#2D74B2]"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-lg p-2 mt-1 font-medium text-gray-800 text-[11px] focus:outline-none focus:border-[#2D74B2]"
                 />
               </div>
 
               {/* Quantity & Refund Amount */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Quantity</label>
+                  <label className="block text-gray-700 font-semibold mb-1">Quantity</label>
                   <input
                     type="number"
                     min="1"
                     value={quantity}
                     onChange={(e) => handleQuantityChange(parseInt(e.target.value) || 1)}
-                    className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg p-2.5 font-mono font-bold text-gray-900 dark:text-gray-100 focus:outline-none focus:border-[#2D74B2]"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg p-2.5 font-mono font-bold text-gray-900 focus:outline-none focus:border-[#2D74B2]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-1">
+                  <label className="block text-gray-700 font-semibold mb-1">
                     Refund Amount (₹) <span className="text-rose-500">*</span>
                   </label>
                   <input
@@ -320,7 +320,7 @@ export const ReturnProductTab: React.FC<ReturnProductTabProps> = ({
                     placeholder="e.g. 2000"
                     value={refundAmount}
                     onChange={(e) => setRefundAmount(e.target.value)}
-                    className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg p-2.5 font-mono font-bold text-gray-900 dark:text-gray-100 focus:outline-none focus:border-[#2D74B2]"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg p-2.5 font-mono font-bold text-gray-900 focus:outline-none focus:border-[#2D74B2]"
                   />
                 </div>
               </div>
@@ -328,11 +328,11 @@ export const ReturnProductTab: React.FC<ReturnProductTabProps> = ({
               {/* Return Reason & Return Date */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Return Reason</label>
+                  <label className="block text-gray-700 font-semibold mb-1">Return Reason</label>
                   <select
                     value={reason}
                     onChange={(e) => setReason(e.target.value as ReturnReason)}
-                    className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg p-2.5 font-semibold text-gray-800 dark:text-gray-200 focus:outline-none focus:border-[#2D74B2]"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg p-2.5 font-semibold text-gray-800 focus:outline-none focus:border-[#2D74B2]"
                   >
                     <option value="Damaged">Damaged</option>
                     <option value="Wrong Size">Wrong Size</option>
@@ -343,23 +343,23 @@ export const ReturnProductTab: React.FC<ReturnProductTabProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Return Date</label>
+                  <label className="block text-gray-700 font-semibold mb-1">Return Date</label>
                   <input
                     type="date"
                     value={returnDate}
                     onChange={(e) => setReturnDate(e.target.value)}
-                    className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg p-2.5 font-medium text-gray-800 dark:text-gray-200 focus:outline-none focus:border-[#2D74B2]"
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg p-2.5 font-medium text-gray-800 focus:outline-none focus:border-[#2D74B2]"
                   />
                 </div>
               </div>
 
               {/* Return Status */}
               <div>
-                <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-1">Return Status</label>
+                <label className="block text-gray-700 font-semibold mb-1">Return Status</label>
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value as ReturnStatus)}
-                  className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg p-2.5 font-bold text-gray-900 dark:text-gray-100 focus:outline-none focus:border-[#2D74B2]"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-lg p-2.5 font-bold text-gray-900 focus:outline-none focus:border-[#2D74B2]"
                 >
                   <option value="Approved">Approved (Deducts Sales immediately)</option>
                   <option value="Pending Inspection">Pending Inspection</option>
@@ -368,10 +368,10 @@ export const ReturnProductTab: React.FC<ReturnProductTabProps> = ({
               </div>
 
               {/* Restock Inventory Checkbox */}
-              <div className="p-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl flex items-center justify-between">
+              <div className="p-3 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-between">
                 <div>
-                  <span className="font-bold text-gray-900 dark:text-gray-100 block">Restock Inventory</span>
-                  <span className="text-[10px] text-gray-500 dark:text-gray-400">
+                  <span className="font-bold text-gray-900 block">Restock Inventory</span>
+                  <span className="text-[10px] text-gray-500">
                     If checked, increases Product Inventory by +{quantity} unit(s).
                   </span>
                 </div>
@@ -399,23 +399,23 @@ export const ReturnProductTab: React.FC<ReturnProductTabProps> = ({
         {/* Processed Returns Log Table (7 cols) */}
         <Card className="lg:col-span-7 flex flex-col justify-between">
           <div>
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 dark:border-white/10 pb-3 mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-3 mb-4">
               <div>
-                <h3 className="font-bold text-base text-gray-900 dark:text-gray-100">Return History & Audit Log</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
+                <h3 className="font-bold text-base text-gray-900">Return History & Audit Log</h3>
+                <p className="text-xs text-gray-500">
                   Itemized log of customer return requests and inventory restock state
                 </p>
               </div>
 
               <div className="flex items-center gap-2">
                 <div className="relative">
-                  <Search className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500 absolute left-2.5 top-2.5" />
+                  <Search className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-2.5" />
                   <input
                     type="text"
                     placeholder="Search returns..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-xs rounded-lg pl-7 pr-2 py-1.5 focus:outline-none focus:border-[#2D74B2]"
+                    className="bg-gray-50 border border-gray-200 text-xs rounded-lg pl-7 pr-2 py-1.5 focus:outline-none focus:border-[#2D74B2]"
                   />
                 </div>
 
@@ -434,9 +434,9 @@ export const ReturnProductTab: React.FC<ReturnProductTabProps> = ({
                       'Restocked to Inventory': r.restockInventory ? 'Yes' : 'No',
                       'Audit Status': r.status,
                     }));
-                    downloadReportFile('Returns_Refund_Audit_Ledger', 'CSV', 'Raymond Nationwide', exportRows);
+                    downloadReportFile('Returns_Refund_Audit_Ledger', 'CSV', 'Raymonds Nationwide', exportRows);
                   }}
-                  className="p-1.5 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:bg-gray-100 dark:hover:bg-white/10 rounded-lg text-gray-600 dark:text-gray-400 cursor-pointer flex items-center gap-1 text-xs font-semibold"
+                  className="p-1.5 bg-gray-50 border border-gray-200 hover:bg-gray-100 rounded-lg text-gray-600 cursor-pointer flex items-center gap-1 text-xs font-semibold"
                   title="Export Returns Audit CSV"
                 >
                   <Download className="w-3.5 h-3.5 text-[#2D74B2]" />
@@ -446,7 +446,7 @@ export const ReturnProductTab: React.FC<ReturnProductTabProps> = ({
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
-                  className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-xs font-semibold rounded-lg py-1.5 px-2 text-gray-700 dark:text-gray-300 cursor-pointer"
+                  className="bg-gray-50 border border-gray-200 text-xs font-semibold rounded-lg py-1.5 px-2 text-gray-700 cursor-pointer"
                 >
                   <option value="All">All Status</option>
                   <option value="Approved">Approved</option>
@@ -460,7 +460,7 @@ export const ReturnProductTab: React.FC<ReturnProductTabProps> = ({
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="bg-gray-50 dark:bg-white/5 text-gray-400 dark:text-gray-500 font-bold uppercase tracking-wider text-[10px] border-b border-gray-200 dark:border-white/10">
+                  <tr className="bg-gray-50 text-gray-400 font-bold uppercase tracking-wider text-[10px] border-b border-gray-200">
                     <th className="py-2.5 px-3">Return ID</th>
                     <th className="py-2.5 px-3">Customer</th>
                     <th className="py-2.5 px-3">Product Item</th>
@@ -470,38 +470,38 @@ export const ReturnProductTab: React.FC<ReturnProductTabProps> = ({
                     <th className="py-2.5 px-3 text-right">Status</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100 dark:divide-white/10">
+                <tbody className="divide-y divide-gray-100">
                   {filteredReturns.map((ret) => (
                     <tr key={ret.id} className="hover:bg-gray-50/70 transition-colors">
-                      <td className="py-3 px-3 font-mono font-bold text-gray-900 dark:text-gray-100">
+                      <td className="py-3 px-3 font-mono font-bold text-gray-900">
                         {ret.id}
-                        <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal">{ret.returnDate}</div>
+                        <div className="text-[10px] text-gray-400 font-normal">{ret.returnDate}</div>
                       </td>
-                      <td className="py-3 px-3 font-semibold text-gray-800 dark:text-gray-200">
+                      <td className="py-3 px-3 font-semibold text-gray-800">
                         {ret.customerName}
-                        <div className="text-[10px] text-gray-400 dark:text-gray-500 font-mono">{ret.orderId}</div>
+                        <div className="text-[10px] text-gray-400 font-mono">{ret.orderId}</div>
                       </td>
-                      <td className="py-3 px-3 text-gray-800 dark:text-gray-200">
+                      <td className="py-3 px-3 text-gray-800">
                         <span className="font-medium max-w-[150px] block truncate">
                           {ret.productName}
                         </span>
-                        <span className="text-[10px] text-gray-400 dark:text-gray-500 font-mono">Qty: {ret.quantity}</span>
+                        <span className="text-[10px] text-gray-400 font-mono">Qty: {ret.quantity}</span>
                       </td>
                       <td className="py-3 px-3">
-                        <span className="bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-300 text-[10px] font-semibold px-2 py-0.5 rounded">
+                        <span className="bg-gray-100 text-gray-700 text-[10px] font-semibold px-2 py-0.5 rounded">
                           {ret.reason}
                         </span>
                       </td>
-                      <td className="py-3 px-3 font-mono font-bold text-rose-600 dark:text-rose-400">
+                      <td className="py-3 px-3 font-mono font-bold text-rose-600">
                         {formatINR(ret.refundAmount)}
                       </td>
                       <td className="py-3 px-3">
                         {ret.restockInventory ? (
-                          <span className="bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-bold text-[10px] px-2 py-0.5 rounded inline-flex items-center gap-1">
+                          <span className="bg-emerald-50 text-emerald-700 font-bold text-[10px] px-2 py-0.5 rounded inline-flex items-center gap-1">
                             ✓ Yes (+{ret.quantity})
                           </span>
                         ) : (
-                          <span className="bg-gray-100 dark:bg-white/10 text-gray-500 dark:text-gray-400 font-medium text-[10px] px-2 py-0.5 rounded">
+                          <span className="bg-gray-100 text-gray-500 font-medium text-[10px] px-2 py-0.5 rounded">
                             No
                           </span>
                         )}
@@ -510,10 +510,10 @@ export const ReturnProductTab: React.FC<ReturnProductTabProps> = ({
                         <span
                           className={`font-bold text-[10px] px-2 py-0.5 rounded inline-block ${
                             ret.status === 'Approved'
-                              ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20'
+                              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
                               : ret.status === 'Pending Inspection'
-                              ? 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20'
-                              : 'bg-rose-50 dark:bg-rose-500/10 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-500/20'
+                              ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                              : 'bg-rose-50 text-rose-700 border border-rose-200'
                           }`}
                         >
                           {ret.status}
@@ -526,7 +526,7 @@ export const ReturnProductTab: React.FC<ReturnProductTabProps> = ({
             </div>
 
             {filteredReturns.length === 0 && (
-              <div className="text-center py-8 text-gray-400 dark:text-gray-500">
+              <div className="text-center py-8 text-gray-400">
                 <RotateCcw className="w-8 h-8 mx-auto mb-2 opacity-50" />
                 <p className="text-xs font-semibold">No returns match your search filter</p>
               </div>
