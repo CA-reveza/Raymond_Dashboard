@@ -4,22 +4,33 @@ import { marketplaceDb, marketplaceReady } from "../marketplaceSupabase.js";
 const router = Router();
 
 // ---------------------------------------------------------------------------
-// Confirmed schema (docs/marketplace_movies_schema.sql +
-// docs/marketplace_full_schema.txt). None of these tables have a direct
-// `email` column -- everything hangs off app_users via user_id. We do
-// explicit two-step lookups (fetch ids, then batch-fetch related rows)
-// rather than PostgREST's embedded-resource syntax, since that requires
-// declared FK constraints we haven't confirmed exist.
+// Confirmed schema (verified directly against the Axionik MarketplacePro
+// Supabase project's public schema on 2026-08-11). None of these tables have
+// declared FK constraints we've confirmed exist, so we do explicit two-step
+// lookups (fetch ids, then batch-fetch related rows) rather than PostgREST's
+// embedded-resource syntax.
 //
-// NOTE: This file only handles retail orders. Movie bookings and restaurant
-// reservations were removed since only retail order data is required.
+// orders:    id, customer_id, items (jsonb), num_items, base_amount,
+//            discount_id, discount_amount, final_amount, status,
+//            shipping_address (jsonb), source, source_client,
+//            payment_provider, payment_link_id, payment_link_url,
+//            payment_ref, hold_expires_at, created_at, confirmed_at
+// customers: id, email, full_name, phone, default_address (jsonb), created_at
+// products:  id, category_id, brand, name, color, pattern, fit, fabric, sku,
+//            price, mrp, discount_percent, image_url, product_url,
+//            is_active, created_at
+//
+// NOTE: There is no `stores` table in this project, so `source_client` is
+// used in its place to show where the order originated from. This file only
+// handles retail orders. Movie bookings and restaurant reservations were
+// removed since only retail order data is required.
 // ---------------------------------------------------------------------------
 
 const RECENT_LIMIT = 100; // cap for the "all customers" activity feed
 
-async function getUserIdByEmail(email) {
+async function getCustomerIdByEmail(email) {
   const { data, error } = await marketplaceDb
-    .from("app_users")
+    .from("customers")
     .select("id")
     .eq("email", email)
     .maybeSingle();
@@ -43,49 +54,54 @@ async function withMarketplaceReady(fn) {
   }
 }
 
-// userId === null means "across all customers" (used by the Connectors tab).
-function applyUserFilter(query, userId) {
-  return userId ? query.eq("user_id", userId) : query.limit(RECENT_LIMIT);
+// customerId === null means "across all customers" (used by the Connectors tab).
+function applyCustomerFilter(query, customerId) {
+  return customerId ? query.eq("customer_id", customerId) : query.limit(RECENT_LIMIT);
 }
 
 // ---------------------------------------------------------------------------
-// Retail orders: retail_orders -> app_users + stores
+// Retail orders: orders -> customers + products (via items jsonb)
 // ---------------------------------------------------------------------------
-async function fetchRetailOrders(userId) {
+async function fetchRetailOrders(customerId) {
   return withMarketplaceReady(async () => {
-    const { data: orders, error } = await applyUserFilter(
+    const { data: orders, error } = await applyCustomerFilter(
       marketplaceDb
-        .from("retail_orders")
+        .from("orders")
         .select(
-          "id, user_id, store_id, line_items, base_amount, discount_amount, final_amount, status, source, payment_ref, created_at, confirmed_at"
+          "id, customer_id, items, num_items, base_amount, discount_amount, final_amount, status, source, source_client, payment_ref, created_at, confirmed_at"
         )
         .order("created_at", { ascending: false }),
-      userId
+      customerId
     );
     if (error) throw error;
     if (!orders?.length) return [];
 
-    const [stores, customers] = await Promise.all([
+    const productIds = orders.flatMap((o) => (o.items || []).map((li) => li.product_id)).filter(Boolean);
+
+    const [products, customers] = await Promise.all([
+      lookupById("products", productIds, "id, name, brand, price"),
       lookupById(
-        "stores",
-        orders.map((o) => o.store_id),
-        "id, brand_name"
-      ),
-      lookupById(
-        "app_users",
-        orders.map((o) => o.user_id),
+        "customers",
+        orders.map((o) => o.customer_id),
         "id, full_name, email"
       ),
     ]);
 
     return orders.map((o) => {
-      const customer = customers.get(o.user_id);
+      const customer = customers.get(o.customer_id);
       return {
         id: o.id,
         customer_name: customer?.full_name || "-",
         customer_email: customer?.email || "-",
-        store: stores.get(o.store_id)?.brand_name || "-",
-        items: (o.line_items || []).map((li) => `${li.qty}x @Rs${li.unit_price}`).join(", "),
+        store: o.source_client || o.source || "-",
+        items: (o.items || [])
+          .map((li) => {
+            const product = products.get(li.product_id);
+            const label = product ? `${product.brand ? product.brand + " " : ""}${product.name}` : "Item";
+            const size = li.size ? ` (${li.size})` : "";
+            return `${li.quantity || 1}x ${label}${size}`;
+          })
+          .join(", "),
         amount: o.final_amount,
         discount: o.discount_amount,
         status: o.status,
@@ -97,8 +113,8 @@ async function fetchRetailOrders(userId) {
   });
 }
 
-async function buildActivity(userId) {
-  const retail = await fetchRetailOrders(userId);
+async function buildActivity(customerId) {
+  const retail = await fetchRetailOrders(customerId);
   return [{ key: "retail_orders", label: "Retail Orders", rows: retail.rows, error: retail.error }];
 }
 
@@ -134,9 +150,9 @@ router.get("/api/marketplace/:email", async (req, res) => {
 
   if (!marketplaceReady) return res.json(notConfiguredResponse({ email }));
 
-  let userId;
+  let customerId;
   try {
-    userId = await getUserIdByEmail(email);
+    customerId = await getCustomerIdByEmail(email);
   } catch (err) {
     return res.json({
       success: false,
@@ -147,7 +163,7 @@ router.get("/api/marketplace/:email", async (req, res) => {
     });
   }
 
-  if (!userId) {
+  if (!customerId) {
     return res.json({
       success: true,
       marketplace_ready: true,
@@ -157,7 +173,7 @@ router.get("/api/marketplace/:email", async (req, res) => {
     });
   }
 
-  const activity = await buildActivity(userId);
+  const activity = await buildActivity(customerId);
   res.json({ success: true, marketplace_ready: true, email, activity });
 });
 
