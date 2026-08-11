@@ -1,8 +1,8 @@
-export const STORE_ID = "store_shoppers_stop";
+export const STORE_ID = "store_raymonds";
 
 export const STORE = {
   store_id: STORE_ID,
-  name: "SHOPPERS STOP Flagship",
+  name: "RAYMONDS Flagship",
   offers: [
     "TODAY ONLY: 20% OFF Welcome Voucher!",
     "EXCLUSIVE: Free Gift Voucher on purchases over ₹4,999!",

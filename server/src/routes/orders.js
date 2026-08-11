@@ -9,9 +9,9 @@ const router = Router();
 router.post("/api/order", async (req, res) => {
   const body = req.body || {};
   const user = body.user || {};
-  const name = user.name || body.customerName || "Shoppers Stop Guest";
+  const name = user.name || body.customerName || "Raymonds Guest";
   const phone = user.phone || body.customerPhone || "+91 98201 00000";
-  const email = user.email || body.customerEmail || "guest@shoppersstop.com";
+  const email = user.email || body.customerEmail || "guest@raymonds.com";
   const items = body.items || [];
   const total =
     body.finalTotal ||
@@ -37,7 +37,7 @@ router.post("/api/order", async (req, res) => {
   };
   await saveCustomer(customer);
 
-  const orderId = body.orderId || shortId("SS-ORD");
+  const orderId = body.orderId || shortId("RAY-ORD");
   const order = {
     id: orderId,
     order_id: orderId,

@@ -10,7 +10,12 @@ const router = Router();
 // explicit two-step lookups (fetch ids, then batch-fetch related rows)
 // rather than PostgREST's embedded-resource syntax, since that requires
 // declared FK constraints we haven't confirmed exist.
+//
+// NOTE: This file only handles retail orders. Movie bookings and restaurant
+// reservations were removed since only retail order data is required.
 // ---------------------------------------------------------------------------
+
+const RECENT_LIMIT = 100; // cap for the "all customers" activity feed
 
 async function getUserIdByEmail(email) {
   const { data, error } = await marketplaceDb
@@ -38,221 +43,96 @@ async function withMarketplaceReady(fn) {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Movie bookings: bookings -> shows -> movies + theatres
-// ---------------------------------------------------------------------------
-async function fetchMovieBookings(userId) {
-  return withMarketplaceReady(async () => {
-    const { data: bookings, error } = await marketplaceDb
-      .from("bookings")
-      .select(
-        "id, show_id, num_seats, base_amount, discount_amount, final_amount, status, source, created_at, confirmed_at"
-      )
-      .eq("user_id", userId)
-      .order("created_at", { ascending: false });
-    if (error) throw error;
-    if (!bookings?.length) return [];
-
-    const shows = await lookupById(
-      "shows",
-      bookings.map((b) => b.show_id),
-      "id, movie_id, theatre_id, show_date, show_time"
-    );
-    const movieIds = [...shows.values()].map((s) => s.movie_id);
-    const theatreIds = [...shows.values()].map((s) => s.theatre_id);
-    const movies = await lookupById("movies", movieIds, "id, title");
-    const theatres = await lookupById("theatres", theatreIds, "id, name");
-
-    return bookings.map((b) => {
-      const show = shows.get(b.show_id);
-      return {
-        id: b.id,
-        movie: show ? movies.get(show.movie_id)?.title || "-" : "-",
-        theatre: show ? theatres.get(show.theatre_id)?.name || "-" : "-",
-        show_date: show?.show_date || "-",
-        show_time: show?.show_time || "-",
-        seats: b.num_seats,
-        amount: b.final_amount,
-        status: b.status,
-        booked_via: b.source,
-        confirmed_at: b.confirmed_at,
-      };
-    });
-  });
+// userId === null means "across all customers" (used by the Connectors tab).
+function applyUserFilter(query, userId) {
+  return userId ? query.eq("user_id", userId) : query.limit(RECENT_LIMIT);
 }
 
 // ---------------------------------------------------------------------------
-// Retail orders: retail_orders -> stores
+// Retail orders: retail_orders -> app_users + stores
 // ---------------------------------------------------------------------------
 async function fetchRetailOrders(userId) {
   return withMarketplaceReady(async () => {
-    const { data: orders, error } = await marketplaceDb
-      .from("retail_orders")
-      .select(
-        "id, store_id, line_items, base_amount, discount_amount, final_amount, status, source, payment_ref, created_at, confirmed_at"
-      )
-      .eq("user_id", userId)
-      .order("created_at", { ascending: false });
+    const { data: orders, error } = await applyUserFilter(
+      marketplaceDb
+        .from("retail_orders")
+        .select(
+          "id, user_id, store_id, line_items, base_amount, discount_amount, final_amount, status, source, payment_ref, created_at, confirmed_at"
+        )
+        .order("created_at", { ascending: false }),
+      userId
+    );
     if (error) throw error;
     if (!orders?.length) return [];
 
-    const stores = await lookupById(
-      "stores",
-      orders.map((o) => o.store_id),
-      "id, brand_name"
-    );
+    const [stores, customers] = await Promise.all([
+      lookupById(
+        "stores",
+        orders.map((o) => o.store_id),
+        "id, brand_name"
+      ),
+      lookupById(
+        "app_users",
+        orders.map((o) => o.user_id),
+        "id, full_name, email"
+      ),
+    ]);
 
-    return orders.map((o) => ({
-      id: o.id,
-      store: stores.get(o.store_id)?.brand_name || "-",
-      items: (o.line_items || []).map((li) => `${li.qty}x @Rs${li.unit_price}`).join(", "),
-      amount: o.final_amount,
-      discount: o.discount_amount,
-      status: o.status,
-      payment_ref: o.payment_ref || "-",
-      confirmed_at: o.confirmed_at,
-    }));
-  });
-}
-
-// ---------------------------------------------------------------------------
-// Restaurant reservations: reservations -> restaurants + table_slots
-// ---------------------------------------------------------------------------
-async function fetchRestaurantReservations(userId) {
-  return withMarketplaceReady(async () => {
-    const { data: reservations, error } = await marketplaceDb
-      .from("reservations")
-      .select(
-        "id, restaurant_id, table_slot_id, party_size, pre_ordered_items, base_amount, discount_amount, final_amount, status, source, payment_ref, created_at, confirmed_at"
-      )
-      .eq("user_id", userId)
-      .order("created_at", { ascending: false });
-    if (error) throw error;
-    if (!reservations?.length) return [];
-
-    const restaurants = await lookupById(
-      "restaurants",
-      reservations.map((r) => r.restaurant_id),
-      "id, name"
-    );
-    const slots = await lookupById(
-      "table_slots",
-      reservations.map((r) => r.table_slot_id),
-      "id, slot_date, slot_time"
-    );
-
-    return reservations.map((r) => {
-      const slot = slots.get(r.table_slot_id);
-      return {
-        id: r.id,
-        restaurant: restaurants.get(r.restaurant_id)?.name || "-",
-        date: slot?.slot_date || "-",
-        time: slot?.slot_time || "-",
-        party_size: r.party_size,
-        pre_ordered: (r.pre_ordered_items || []).length
-          ? `${(r.pre_ordered_items || []).length} item(s) pre-ordered`
-          : "-",
-        amount: r.final_amount,
-        status: r.status,
-        payment_ref: r.payment_ref || "-",
-        confirmed_at: r.confirmed_at,
-      };
-    });
-  });
-}
-
-// ---------------------------------------------------------------------------
-// All retail orders, across every customer — for the dashboard's Orders tab.
-// Deliberately retail-only (no movie bookings, no restaurant reservations):
-// this powers a single merged Orders view, not a separate per-vertical tab.
-// Tags each row with which channel placed it (e.g. Claude's MCP connector)
-// so the dashboard can badge it accordingly.
-// ---------------------------------------------------------------------------
-function connectorLabel(source, sourceClient) {
-  if (sourceClient) {
-    const name = sourceClient.charAt(0).toUpperCase() + sourceClient.slice(1);
-    return `Ordered through ${name} Connector`;
-  }
-  if (source === "mcp") return "Ordered through Connector";
-  return null;
-}
-
-router.get("/api/marketplace/orders", async (req, res) => {
-  if (!marketplaceReady) {
-    return res.json({ success: true, marketplace_ready: false, orders: [] });
-  }
-
-  try {
-    const { data: orders, error } = await marketplaceDb
-      .from("retail_orders")
-      .select(
-        "id, user_id, store_id, line_items, base_amount, discount_amount, final_amount, status, source, source_client, payment_ref, created_at, confirmed_at"
-      )
-      .order("created_at", { ascending: false })
-      .limit(200);
-    if (error) throw error;
-    if (!orders?.length) return res.json({ success: true, marketplace_ready: true, orders: [] });
-
-    const users = await lookupById(
-      "app_users",
-      orders.map((o) => o.user_id),
-      "id, full_name, email, phone"
-    );
-    const stores = await lookupById(
-      "stores",
-      orders.map((o) => o.store_id),
-      "id, brand_name"
-    );
-
-    const mapped = orders.map((o) => {
-      const user = users.get(o.user_id);
-      const store = stores.get(o.store_id);
+    return orders.map((o) => {
+      const customer = customers.get(o.user_id);
       return {
         id: o.id,
-        customer_name: user?.full_name || "-",
-        customer_email: user?.email || "-",
-        customer_phone: user?.phone || "-",
-        store: store?.brand_name || "-",
+        customer_name: customer?.full_name || "-",
+        customer_email: customer?.email || "-",
+        store: stores.get(o.store_id)?.brand_name || "-",
         items: (o.line_items || []).map((li) => `${li.qty}x @Rs${li.unit_price}`).join(", "),
         amount: o.final_amount,
         discount: o.discount_amount,
         status: o.status,
-        source: o.source,
-        source_client: o.source_client || null,
-        channel_label: connectorLabel(o.source, o.source_client),
         payment_ref: o.payment_ref || "-",
         created_at: o.created_at,
         confirmed_at: o.confirmed_at,
       };
     });
+  });
+}
 
-    res.json({ success: true, marketplace_ready: true, orders: mapped });
-  } catch (err) {
-    res.json({ success: false, marketplace_ready: true, error: err.message, orders: [] });
-  }
+async function buildActivity(userId) {
+  const retail = await fetchRetailOrders(userId);
+  return [{ key: "retail_orders", label: "Retail Orders", rows: retail.rows, error: retail.error }];
+}
+
+function notConfiguredResponse(extra = {}) {
+  return {
+    success: true,
+    marketplace_ready: false,
+    activity: [
+      { key: "retail_orders", label: "Retail Orders", rows: [], error: "Marketplace Supabase not configured" },
+    ],
+    ...extra,
+  };
+}
+
+// ---------------------------------------------------------------------------
+// GET /api/marketplace/activity/all -- powers the "Connectors" dashboard tab.
+// Shows the most recent retail order activity across ALL Marketplace
+// customers, not scoped to a single Raymonds shopper.
+// ---------------------------------------------------------------------------
+router.get("/api/marketplace/activity/all", async (req, res) => {
+  if (!marketplaceReady) return res.json(notConfiguredResponse());
+  const activity = await buildActivity(null);
+  res.json({ success: true, marketplace_ready: true, activity });
 });
 
+// ---------------------------------------------------------------------------
+// GET /api/marketplace/:email -- per-customer lookup, used by the customer
+// detail modal in the Customers tab.
+// ---------------------------------------------------------------------------
 router.get("/api/marketplace/:email", async (req, res) => {
   const email = decodeURIComponent(req.params.email || "").trim().toLowerCase();
   if (!email) return res.status(400).json({ success: false, error: "email is required" });
 
-  if (!marketplaceReady) {
-    return res.json({
-      success: true,
-      marketplace_ready: false,
-      email,
-      activity: [
-        { key: "movie_bookings", label: "Movie Bookings", rows: [], error: "Marketplace Supabase not configured" },
-        { key: "retail_orders", label: "Retail Orders", rows: [], error: "Marketplace Supabase not configured" },
-        {
-          key: "restaurant_reservations",
-          label: "Restaurant Reservations",
-          rows: [],
-          error: "Marketplace Supabase not configured",
-        },
-      ],
-    });
-  }
+  if (!marketplaceReady) return res.json(notConfiguredResponse({ email }));
 
   let userId;
   try {
@@ -272,36 +152,13 @@ router.get("/api/marketplace/:email", async (req, res) => {
       success: true,
       marketplace_ready: true,
       email,
-      activity: [
-        { key: "movie_bookings", label: "Movie Bookings", rows: [], error: null },
-        { key: "retail_orders", label: "Retail Orders", rows: [], error: null },
-        { key: "restaurant_reservations", label: "Restaurant Reservations", rows: [], error: null },
-      ],
+      activity: [{ key: "retail_orders", label: "Retail Orders", rows: [], error: null }],
       note: "No Marketplace account found for this email.",
     });
   }
 
-  const [movies, retail, reservations] = await Promise.all([
-    fetchMovieBookings(userId),
-    fetchRetailOrders(userId),
-    fetchRestaurantReservations(userId),
-  ]);
-
-  res.json({
-    success: true,
-    marketplace_ready: true,
-    email,
-    activity: [
-      { key: "movie_bookings", label: "Movie Bookings", rows: movies.rows, error: movies.error },
-      { key: "retail_orders", label: "Retail Orders", rows: retail.rows, error: retail.error },
-      {
-        key: "restaurant_reservations",
-        label: "Restaurant Reservations",
-        rows: reservations.rows,
-        error: reservations.error,
-      },
-    ],
-  });
+  const activity = await buildActivity(userId);
+  res.json({ success: true, marketplace_ready: true, email, activity });
 });
 
 export default router;

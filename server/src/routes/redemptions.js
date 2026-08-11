@@ -18,7 +18,7 @@ export async function redeemCoupon({ code, name, email, phone, orderTotal, disco
     customer_email: email || "",
     customer_phone: phone || "",
     loyalty_tier: "Gold First Citizen",
-    order_id: shortId("SS-ORD", 5),
+    order_id: shortId("RAY-ORD", 5),
     order_total: orderTotal ?? coupon.min_order_value ?? 4999,
     discount_saved: discountSaved ?? coupon.discount_value ?? 1000,
     redeemed_at: nowIso(),
